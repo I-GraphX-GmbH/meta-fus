@@ -1,0 +1,14 @@
+Version History for Yocto on F&S Boards and Modules
+===================================================
+
+
+fsimx6-Y0.1 (12.11.2014)
+--------------------------------------
+Supported boards: efusA9
+
+- Based on Yocto branch 1.6 (Daisy)
+- Add F&S layer meta-f+s with efusA9
+- Add some small shell utility functions
+- Integrate F&S Yocto layer with Freescale Community BSP
+- Add README file with first steps
+- Add history file for F&S Yocto releases
