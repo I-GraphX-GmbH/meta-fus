@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# Supply some useful helper functions. Call with
+#
+#  source yocto-f+s-utilities
+#
+
+list_fsl_target_boards()
+{
+[ -f conf/local.conf ] && ls -1 ../sources/meta-fsl-arm/conf/machine/*.conf
+}
+
+list_non_fsl_target_boards()
+{
+[ -f conf/local.conf ] && ls -1 ../sources/meta-fsl-arm-extra/conf/machine/*.conf
+}
+
+list_f+s_target_boards()
+{
+[ -f conf/local.conf ] && ls -1 ../sources/meta-f+s/conf/machine/*.conf
+}
+
+list_target_images()
+{
+[ -f conf/local.conf ] && bitbake-layers show-recipes | grep image\- | sed s/://g
+}
+
+list_all_recipes()
+{
+[ -f conf/local.conf ] && bitbake-layers show-recipes
+}
+
+list_target_image_packages()
+{
+[ -f conf/local.conf ] && [ ! -z $1 ] && bitbake -g $1 &&\
+cat pn-depends.dot | grep -v -e '-native' | grep -v digraph | grep -v -e '-image'\
+| awk '{print $1}' | sort | uniq
+}
