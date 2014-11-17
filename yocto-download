@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# This script downloads the Freescale Yocto Community BSP release and adds
+# the F&S layer to it.
+
+BOARDS=imx6dl-efusa9
+
+# Download the repo tool that handles the download of several GIT repos
+curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
+chmod a+x repo
+
+# Download the Freescale Community BSP repo description for DAISY
+./repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b daisy
+
+# Download the GIT repositories. This is:
+#  - fsl-community-bsp-base
+#  - meta-fsl-arm
+#  - meta-fsl-arm-extra
+#  - poky
+#  - meta-fsl-demos
+#  - meta-openembedded
+./repo sync
+
+# Add the F&S layer to the bblayers.conf file
+sed -i -e "/${BSPDIR}\/sources\/meta-fsl-demos/a\  \${BSPDIR}/sources/meta-f+s \\\\" sources/base/conf/bblayers.conf
+
+# Say that we are done
+echo
+echo "-----------------------"
+echo
+echo "Yocto installation complete. You can now configure for an F&S board."
+echo
+echo "MACHINE=<board> . setup-environment <build-dir>"
+echo
+echo "<board> can be one of: $BOARDS"
+echo "<build-dir> is the name of the build directory to create. We recommend a"
+echo "name that starts with \"build\", e.g. \"build-efusa9\" if you are"
+echo "building for an efusA9 board."
+echo
+echo "You have to repeat this step in every new shell that should be used to"
+echo "build this Yocto image, for example after you have restarted your PC."
+echo
