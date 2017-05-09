@@ -1,9 +1,18 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fsimx6-V0.3 (not officially released, only patches for customers)
+-----------------------------------------------------------------
+Supported boards: efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
+
+- Fix non-working reboot command in linux-3.10.17-f+s
+- Add support for OV9665 camera (parallel CSI) for efusA9 to linux
+
+
+
 fsimx6-Y0.2 (20.03.2015)
 ------------------------
-Supported boards: efusA9 (DL), armStoneA9 (DL)
+Supported boards: efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 
 - Add support for armStoneA9 to u-boot-2014.01-f+s
 - Minor improvements in U-Boot
@@ -13,7 +22,7 @@ Supported boards: efusA9 (DL), armStoneA9 (DL)
 
 fsimx6-Y0.1 (12.11.2014)
 ------------------------
-Supported boards: efusA9 (DL)
+Supported boards: efusA9 (Solo/DualLite)
 
 - Based on Yocto branch 1.6 (Daisy)
 - U-Boot based on F&S fsimx6/u-boot-2014.01-f+s.git: Regular u-boot-imx with
