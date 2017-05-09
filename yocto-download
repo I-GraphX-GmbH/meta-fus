@@ -3,14 +3,14 @@
 # This script downloads the Freescale Yocto Community BSP release and adds
 # the F&S layer to it.
 
-BOARDS=imx6dl-efusa9 imx6dl-armstonea9
+BOARDS=imx6dl-efusa9 imx6dl-armstonea9 imx6sx-efusa9x
 
 # Download the repo tool that handles the download of several GIT repos
 curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
 chmod a+x repo
 
 # Download the Freescale Community BSP repo description for DAISY
-./repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b daisy
+./repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b fido
 
 # Download the GIT repositories. This is:
 #  - fsl-community-bsp-base
