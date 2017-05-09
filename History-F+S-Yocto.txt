@@ -1,10 +1,20 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fsvybrid-Y0.1 (11/2014, not officially released, just internal tests)
+---------------------------------------------------------------------
+Supported boards: armStoneA5, efusA9 (Solo/DualLite)
+
+- Add support for armStoneA5
+- Add recipes for fsvybrid
+- Use u-boot-2012.07-fsvybrid-Y0.1 for fsvybrid
+- Use linux-3.0.15-fsvybrid-Y0.1 for fsvybrid
+
+
 
 fsimx6-Y0.1 (12.11.2014)
---------------------------------------
-Supported boards: efusA9
+------------------------
+Supported boards: efusA9 (Solo/DualLite)
 
 - Based on Yocto branch 1.6 (Daisy)
 - Add F&S layer meta-f+s with efusA9
