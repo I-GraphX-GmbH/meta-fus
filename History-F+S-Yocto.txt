@@ -1,7 +1,18 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
-fsimx6-V0.3 (not officially released, only patches for customers)
+fsimx6sx-Y0.1 (not officially released)
+---------------------------------------
+Supported boards: efusA9X, efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
+
+- Switch to Yocto Freescale Community BSP branch 1.8 (Fido)
+- Add support for efusA9X
+- u-boot-2014.07-fsimx6sx-Y0.1: based on Multi-Platform/u-boot-f+s.git
+- linux-3.14.28-fsimx6sx-Y0.1: based on fsimx6/linux-3.14-f+s.git
+
+
+
+fsimx6-Y0.3 (not officially released, only patches for customers)
 -----------------------------------------------------------------
 Supported boards: efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 
@@ -17,6 +28,7 @@ Supported boards: efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 - Add support for armStoneA9 to u-boot-2014.01-f+s
 - Minor improvements in U-Boot
 - Add device tree for armStoneA9 to linux-3.10.17-f+s
+- u-boot-2014.01-fsimx6-Y0.2, linux-3.10.17-fsimx6-Y0.2
 
 
 
@@ -24,11 +36,13 @@ fsimx6-Y0.1 (12.11.2014)
 ------------------------
 Supported boards: efusA9 (Solo/DualLite)
 
-- Based on Yocto branch 1.6 (Daisy)
-- U-Boot based on F&S fsimx6/u-boot-2014.01-f+s.git: Regular u-boot-imx with
-  original Freescale NAND handling, enhanced with some F&S boot strategies and
-  basic support for fsimx6, no other F&S extensions
-- Linux based on F&S fsimx6/linux-3.10.17-f+s.git
+- Based on Yocto Freescale Community BSP branch 1.6 (Daisy)
+- u-boot-2014.01-fsimx6-Y0.1: U-Boot based on fsimx6/u-boot-2014.01-f+s.git:
+  regular u-boot-imx with original Freescale NAND handling, enhanced with some
+  F&S boot strategies and basic support for fsimx6, no other F&S extensions
+- linux-3.10.17-fsimx6-Y0.1: Linux based on fsimx6/linux-3.10.17-f+s.git:
+  regular Freescale kernel with efusA9 device tree and minor modifications,
+  original Freescale NAND handling
 - Add F&S layer meta-f+s with efusA9
 - Add some small shell utility functions
 - Integrate F&S Yocto layer with Freescale Community BSP
