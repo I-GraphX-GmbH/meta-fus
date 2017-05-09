@@ -14,12 +14,12 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
 #PV = "v2014.01"
 #SRCBRANCH = "patches-2014.01"
 #SRC_URI = "git://github.com/Freescale/u-boot-imx.git;branch=${SRCBRANCH} \
-#	file://u-boot-2014.01-fsimx6-Y0.1.patch"
+#	file://u-boot-2014.01-fsimx6-Y0.2.patch"
 #SRCREV = "f5d80303de12e6fefc022426a73136a288f70294"
 #S = "${WORKDIR}/git"
 
-SRC_URI = "file://u-boot-2014.01-fsimx6-Y0.1.tar.bz2"
-S = "${WORKDIR}/u-boot-2014.01-fsimx6-Y0.1"
+SRC_URI = "file://u-boot-2014.01-fsimx6-Y0.2.tar.bz2"
+S = "${WORKDIR}/u-boot-2014.01-fsimx6-Y0.2"
 PV = "V0.1"
 
 UBOOT_MAKE_TARGET = "all"

@@ -3,7 +3,7 @@
 # This script downloads the Freescale Yocto Community BSP release and adds
 # the F&S layer to it.
 
-BOARDS=imx6dl-efusa9
+BOARDS=imx6dl-efusa9 imx6dl-armstonea9
 
 # Download the repo tool that handles the download of several GIT repos
 curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo

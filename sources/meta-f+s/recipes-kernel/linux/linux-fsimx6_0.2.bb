@@ -21,11 +21,11 @@ COMPATIBLE_MACHINE = "(mx6)"
 #LOCALVERSION = "-1.0.1_ga"
 #SCMVERSION ?= "y"
 #SRC_URI = "git://git.freescale.com/imx/linux-2.6-imx.git;branch=${SRCBRANCH} \
-#	file://linux-3.10.17-fsimx6-Y0.1.patch"
+#	file://linux-3.10.17-fsimx6-Y0.2.patch"
 #S = "${WORKDIR}/git"
 
-SRC_URI = "file://linux-3.10.17-fsimx6-Y0.1.tar.bz2"
-S = "${WORKDIR}/linux-3.10.17-fsimx6-Y0.1"
+SRC_URI = "file://linux-3.10.17-fsimx6-Y0.2.tar.bz2"
+S = "${WORKDIR}/linux-3.10.17-fsimx6-Y0.2"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points

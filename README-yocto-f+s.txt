@@ -1,9 +1,11 @@
-fsimx6-Y0.1
+fsimx6-Y0.2
 ===========
 
-This is the first F&S release for Yocto. At the moment it is only
-available for the efusA9 module (imx6dl-efusa9). Other boards and
-modules will follow in the future.
+This is the second F&S release for Yocto. At the moment it is only
+available for the efusA9 module (imx6dl-efusa9) and armStoneA9
+single-board computer (imx6dl-armstonea9) with the single or dual core
+version of the i.MX6 CPU (Solo or DualLite). Other boards, modules and
+CPU variants will follow in the future.
 
 This release is based on the Freescale fsl-community-bsp release of
 Yocto which in turn is based on Yocto 1.6.1 (Daisy). It provides a
@@ -116,8 +118,8 @@ Installation
 First of all, unpack the F&S Yocto release. Yocto-only releases are
 marked with a 'Y' instead of a 'V' for the release version number.
 
-  tar xvf fsimx6-Y0.1.tar.bz2
-  cd fsimx6-Y0.1
+  tar xvf fsimx6-Y0.2.tar.bz2
+  cd fsimx6-Y0.2
 
 As mentioned above, the F&S Yocto release uses different layers from
 different sources. When installing, these layers are actually
@@ -155,20 +157,20 @@ Configure for a board
 
 To configure for a specific F&S board, simply call
 
-  MACHINE=<board> . setup-environment <build-dir>
+  MACHINE=<board-name> . setup-environment <build-dir>
 
 Please note the extra dot that is used to run the setup-environment in
 the current shell by sourcing it and not spawning a new sub-shell.
 
-<board> can be one of the supported boards, which is currently only
-imx6dl-efusa9. <build-dir> is the name of the build directory to
-create. We recommend a name that starts with "build", e.g.
-"build-efusa9". This command will automatically switch to the newly
-created directory and sets the environment so that everything runs
-smoothly. You have to repeat this step in every new shell that should
-be used to build this Yocto image. For example if you restart your PC,
-you have to call this command again to set up the environment
-correctly again.
+<board-name> can be one of the supported boards, which is currently only
+imx6dl-efusa9 or imx6dl-armstonea9. <build-dir> is the name of the
+build directory to create. We recommend a name that starts with
+"build", e.g. "build-efusa9". This command will automatically switch
+to the newly created directory and sets the environment so that
+everything runs smoothly. You have to repeat this step in every new
+shell that should be used to build this Yocto image. For example if
+you restart your PC, you have to call this command again to set up the
+environment correctly again.
 
 
 Build an image
@@ -195,13 +197,17 @@ The resulting files can be found in
 
   tmp/deploy/images
 
-The names are:
+The names are as follows. Please replace <board-name> with the board
+name that you configured your Yocto system with, e.g. imx6dl-efusa9 or
+imx6dl-armstonea9, and <image-name> with the name of the target image
+that you have built.
 
-  uImage                              Linux kernel image for efusA9
-  uImage-imx6dl-efusa9.dtb            Device tree for efusA9
-  <image-name>-imx6dl-efusa9.ubifs    Image to be installed in NAND flash
-  <image-name>-imx6dl-efusa9.ext3     ext3 image, e.g. to be used via NFS
-  <image-name>-imx6dl-efusa9.sdcard   Image to be installed on an SD card
+  uboot.nb0                          U-Boot binary (suited for NBoot)
+  uImage                             Linux kernel image for <board-name>
+  uImage-<board-name>.dtb            Device tree for <board-name>
+  <image-name>-<board-name>.ubifs    Image to be installed in NAND flash
+  <image-name>-<board-name>.ext3     ext3 image, e.g. to be used via NFS
+  <image-name>-<board-name>.sdcard   Image to be installed on an SD card
 
 If the build process fails at some time, you can fix the error and
 continue by calling the bitbake command again. This will skip all the
@@ -221,14 +227,17 @@ process completely anew.
 
 Remark:
 
-The fsl-image-machine-test creates an UBIFS image with a size of about
-300MB. This does not fit into the 256MB of flash memory on the efusA9,
-so it can not be run from NAND flash. This rootfs can only be mounted
-via NFS or SD card.
+Some images are rather large and may not fit into the NAND flash
+memory of your board or module. So for example fsl-image-multimedia
+results in a file of about 160MB which does not fit into the 128MB of
+the regular armStoneA9, so it can not be run from NAND flash. Such a
+rootfs can only be mounted via NFS or SD card then.
 
-To compile this image, you have to modify the file
+In addition, the fsl-image-machine-test creates an UBIFS image with a
+size of about 300MB. The UBIFS images are configured to be at most
+256MB of size. To compile this image, you have to modify the file
 
-  sources/meta-fsimx6/conf/machine/imx6dl-efusa9.conf
+  sources/meta-fsimx6/conf/machine/<board-name>.conf
 
 to avoid an overflow of the UBIFS rootfs. Replace the line
 
@@ -271,6 +280,73 @@ and then add it again to the final target image.
   bitbake -c clean <package>
   bitbake -c compile <package>
   bitbake <image-name>
+
+
+Install U-Boot on the board
+---------------------------
+
+To install the U-Boot image on the board, start the board and go into
+NBoot. This is done by pressing 's' (lower-case S) until it repeats,
+then restart the board. Use a terminal program that supports 1:1
+binary download, for example DCUTermi from F&S or Tera Term.
+
+If you are coming from a different environment, for example from a
+Buildroot based environment, we recommend erasing the whole NAND flash
+with command 'E' (upper-case e) here.
+
+Now press 'd' (lower-case D) to start the serial download. Then send
+the file "uboot.nb0" to the board. After download is complete, press
+'f' (lower-case F) to save U-Boot to NAND flash. Now restart the board
+or simply press 'x' (lower-case X) to start U-Boot directly from the
+loaded image in RAM.
+
+
+Install kernel image and rootfs
+-------------------------------
+
+On the PC, the images have to be copied to a directory from where they
+can be downloaded via TFTP. So you need to have a TFTP server running
+on your PC. When you are following the instructions of the F&S
+documentation "AdvicedForLinuxOnPC_eng.pdf" for how to do this, you
+have a directory /tftpboot for this purpose. So copy the following
+files to it:
+
+  cp uImage /tftpboot
+  cp uImage-<board-name>.dtb /tftpboot
+  cp <image-name>-<board-name>.ubifs /tftpboot
+
+Now on your board go to U-Boot. This is done by pressing a key while
+the Autostart countdown counts down. If you have not done it already,
+set the correct network configuration variables, i.e. ethaddr,
+gateway, netmask, and of course serverip to the IP address of your PC.
+Save these settings with saveenv.
+
+Download and save the kernel image:
+
+  tftp uImage
+  nand erase.part Kernel
+  nand write $loadaddr Kernel $filesize
+
+Download and save the device tree data:
+
+  tftp uImage-<board-name>.dtb
+  nand erase.part FTD
+  nand write $loadaddr FDT $filesize
+
+Download and save the rootfs image:
+
+  ubi part TargetFS
+  tftp <image-name>-<board-name>.ubifs
+  ubi write $loadaddr rootfs $filesize
+
+Finally make sure that the boot strategy is set up for device trees.
+
+  run _kernel_nand
+  run _rootfs_ubifs
+  run _fdt_nand
+  saveenv
+
+Now start the linux system with "boot" or simply restart the board.
 
 
 Useful utilities
