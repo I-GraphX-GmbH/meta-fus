@@ -1,12 +1,25 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fsimx6-Y0.2 (20.03.2015)
+------------------------
+Supported boards: efusA9 (DL), armStoneA9 (DL)
+
+- Add support for armStoneA9 to u-boot-2014.01-f+s
+- Minor improvements in U-Boot
+- Add device tree for armStoneA9 to linux-3.10.17-f+s
+
+
 
 fsimx6-Y0.1 (12.11.2014)
---------------------------------------
-Supported boards: efusA9
+------------------------
+Supported boards: efusA9 (DL)
 
 - Based on Yocto branch 1.6 (Daisy)
+- U-Boot based on F&S fsimx6/u-boot-2014.01-f+s.git: Regular u-boot-imx with
+  original Freescale NAND handling, enhanced with some F&S boot strategies and
+  basic support for fsimx6, no other F&S extensions
+- Linux based on F&S fsimx6/linux-3.10.17-f+s.git
 - Add F&S layer meta-f+s with efusA9
 - Add some small shell utility functions
 - Integrate F&S Yocto layer with Freescale Community BSP
