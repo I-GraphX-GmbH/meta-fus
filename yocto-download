@@ -10,10 +10,12 @@ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
 chmod a+x repo
 
 # Download the Freescale Community BSP repo description for DAISY
-./repo init -u https://github.com/Freescale/fsl-community-bsp-platform -b fido
+./repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.28-1.0.0_ga
 
 # Download the GIT repositories. This is:
 #  - fsl-community-bsp-base
+#  - meta-fsl-bsp-release
+#  - meta-fsl-demos
 #  - meta-fsl-arm
 #  - meta-fsl-arm-extra
 #  - poky
