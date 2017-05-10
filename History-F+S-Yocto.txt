@@ -1,8 +1,21 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
-fsimx6sx-Y0.1 (not officially released)
----------------------------------------
+fsimx6sx-Y0.2 (04/2016, not officially released)
+------------------------------------------------
+Supported boards: efusA9X, efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
+
+- The Freescale Release BSP has better support for the hardware features of
+  Freecsale SOCs (i.MX6, etc.) than the Freescale Community BSP, so switch to
+  newly released fsl-yocto-3.14.38_6QDP_ga; this version has full graphics
+  support for i.MX6-SoloX.
+- Add instructions on how to compile Chromium to README-yocto-f+s.txt
+- u-boot-2014.07-fsimx6sx-Y0.2, linux-3.14.52-fsimx6sx-Y0.2
+
+
+
+fsimx6sx-Y0.1 (08/2015, not officially released)
+------------------------------------------------
 Supported boards: efusA9X, efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 
 - Switch to Yocto Freescale Community BSP branch 1.8 (Fido)
@@ -12,8 +25,8 @@ Supported boards: efusA9X, efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 
 
 
-fsimx6-Y0.3 (not officially released, only patches for customers)
------------------------------------------------------------------
+fsimx6-Y0.3 (08/2015, not officially released, only patches for customers)
+--------------------------------------------------------------------------
 Supported boards: efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
 
 - Fix non-working reboot command in linux-3.10.17-f+s
