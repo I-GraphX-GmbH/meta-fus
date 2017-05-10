@@ -1,6 +1,21 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fsimx6-Y0.4 (07/2016, not officially released)
+----------------------------------------------
+Supported boards: efusA9X, efusA9, armStoneA9
+
+- Switch to fsl-yocto-L4.1.15_1.1.0-ga (Yocto 2.0.1, Jethro)
+- Add support for efusA9 Quad, armStoneA9 Quad
+- u-boot-2014.07-fsimx6-Y0.4: based on Multi-Platform/u-boot-f+s.git
+- linux-4.1.15-fsimx6-Y0.4: based on fsimx6/linux-3.14-f+s.git
+
+Remark:
+This version needs manual modifications in Freescale files to work.
+See README-yocto-f+s.txt for further instructions.
+
+
+
 fsimx6sx-Y0.2 (04/2016, not officially released)
 ------------------------------------------------
 Supported boards: efusA9X, efusA9 (Solo/DualLite), armStoneA9 (Solo/DualLite)
