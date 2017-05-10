@@ -3,27 +3,41 @@
 # This script downloads the Freescale Yocto Community BSP release and adds
 # the F&S layer to it.
 
-BOARDS=imx6dl-efusa9 imx6dl-armstonea9 imx6sx-efusa9x
+# Cause script to stop on errors, e.g. if download fails
+set -e
+
+# List of possible board names that will be shown later
+BOARDS="imx6dl-efusa9 imx6dl-armstonea9 imx6sx-efusa9x"
 
 # Download the repo tool that handles the download of several GIT repos
-curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
-chmod a+x repo
+if [ ! -x ./repo ]
+then
+    echo "Downloading repo tool"
+    curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > repo
+    chmod a+x repo
+fi
 
-# Download the Freescale Community BSP repo description for DAISY
-./repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.28-1.0.0_ga
+# Download the Freescale Release BSP repo description for DIZZY
+echo "Getting download information (repo init)"
+DOWNLOAD_URL=git://git.freescale.com/imx/fsl-arm-yocto-bsp.git
+BRANCH=imx-3.14.28-1.0.0_ga
+./repo init -u $DOWNLOAD_URL -b $BRANCH
 
 # Download the GIT repositories. This is:
 #  - fsl-community-bsp-base
-#  - meta-fsl-bsp-release
-#  - meta-fsl-demos
 #  - meta-fsl-arm
 #  - meta-fsl-arm-extra
-#  - poky
 #  - meta-fsl-demos
+#  - poky
 #  - meta-openembedded
+#  - meta-fsl-bsp-release
+#  - meta-browser
+#  - meta-qt5
+echo "Downloading all Yocto packages (repo sync)"
 ./repo sync
 
 # Add the F&S layer to the bblayers.conf file
+echo "Adding F&S layer to bblayers"
 sed -i -e "/${BSPDIR}\/sources\/meta-fsl-demos/a\  \${BSPDIR}/sources/meta-f+s \\\\" sources/base/conf/bblayers.conf
 
 # Say that we are done
@@ -32,7 +46,7 @@ echo "-----------------------"
 echo
 echo "Yocto installation complete. You can now configure for an F&S board."
 echo
-echo "MACHINE=<board> . setup-environment <build-dir>"
+echo "MACHINE=<board> source setup-environment <build-dir>"
 echo
 echo "<board> can be one of: $BOARDS"
 echo "<build-dir> is the name of the build directory to create. We recommend a"
