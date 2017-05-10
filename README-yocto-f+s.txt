@@ -1,15 +1,13 @@
-fsimx6-Y0.2
+fsimx6-Y0.4
 ===========
 
-This is the second F&S release for Yocto. At the moment it is only
-available for the efusA9 module (imx6dl-efusa9) and armStoneA9
-single-board computer (imx6dl-armstonea9) with the single or dual core
-version of the i.MX6 CPU (Solo or DualLite). Other boards, modules and
-CPU variants will follow in the future.
+This is an F&S pre-release for Yocto. At the moment it is only
+available for a small subset of F&S boards and modules (see below).
 
-This release is based on the Freescale fsl-community-bsp release of
-Yocto which in turn is based on Yocto 1.6.1 (Daisy). It provides a
-U-Boot based on u-boot-2014.01 and a Linux kernel based on 3.10.17.
+This release is based on the Freescale Release BSP of Yocto which in
+turn is based on Yocto 2.0.1 (Jethro). It provides a U-Boot based on
+u-boot-2014.07 and a Linux kernel based on 3.14.52 (i.MX6 Solo-X) and
+4.1.15 (regular i.MX6) respectively.
 
 The following standard images were tested:
 
@@ -21,6 +19,27 @@ The following standard images were tested:
 6. fsl-image-multimedia        (159 MB UBIFS)
 7. fsl-image-multimedia-full   (167 MB UBIFS)
 8. fsl-image-machine-test      (300 MB UBIFS)
+
+ATTENTION!
+
+This version will only work if the preferred package providers in
+sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/include are
+modified. The following settings must be removed so that they do not
+overwrite the F&S settings from the meta-f+s layer:
+
+In file fsl-imx-preferred-env.inc:
+
+  PREFERRED_PROVIDER_u-boot_mx6
+  PREFERRED_PROVIDER_u-boot_mx6ul
+  PREFERRED_PROVIDER_virtual/bootloader_mx6
+  PREFERRED_PROVIDER_virtual/bootloader_mx6ul
+  PREFERRED_PROVIDER_virtual/kernel_mx6
+  PREFERRED_PROVIDER_virtual/kernel_mx6ul
+
+In file fsl-imx-base.inc:
+
+  IMAGE_FSTYPES
+
 
 
 About Yocto
@@ -118,8 +137,8 @@ Installation
 First of all, unpack the F&S Yocto release. Yocto-only releases are
 marked with a 'Y' instead of a 'V' for the release version number.
 
-  tar xvf fsimx6-Y0.2.tar.bz2
-  cd fsimx6-Y0.2
+  tar xvf fsimx6-Y0.4.tar.bz2
+  cd fsimx6-Y0.4
 
 As mentioned above, the F&S Yocto release uses different layers from
 different sources. When installing, these layers are actually
@@ -144,8 +163,11 @@ layers.
 - fsl-community-bsp-base
 - meta-fsl-arm
 - meta-fsl-arm-extra
-- poky
 - meta-fsl-demos
+- meta-fsl-bsp-release
+- meta-browser
+- meta-qt5
+- poky
 - meta-openembedded
 
 At the end it simply adds the F&S layer (called meta-f+s) to the
@@ -157,20 +179,36 @@ Configure for a board
 
 To configure for a specific F&S board, simply call
 
-  MACHINE=<board-name> . setup-environment <build-dir>
+  DISTRO=<distro> MACHINE=<board-name> . fsl-setup-release.sh -b <build-dir>
 
-Please note the extra dot that is used to run the setup-environment in
-the current shell by sourcing it and not spawning a new sub-shell.
+Please note the extra dot that is used to run the fsl-setup-release.sh
+(and the corresponding setup-environment script) in the current shell
+by sourcing it and not spawning a new sub-shell.
 
-<board-name> can be one of the supported boards, which is currently only
-imx6dl-efusa9 or imx6dl-armstonea9. <build-dir> is the name of the
-build directory to create. We recommend a name that starts with
-"build", e.g. "build-efusa9". This command will automatically switch
-to the newly created directory and sets the environment so that
-everything runs smoothly. You have to repeat this step in every new
-shell that should be used to build this Yocto image. For example if
-you restart your PC, you have to call this command again to set up the
-environment correctly again.
+<distro> is one of the possible display solutions, one of:
+
+  fsl-imx-x11            Only X11 graphics
+  fsl-imx-wayland        Wayland/weston graphics
+  fsl-imx-xwayland       Wayland & X11 graphics; No EGL on X11 applications
+  fsl-imx-fb             Just framebuffer graphics, no X11, no Wayland
+
+<board-name> can be one of the supported boards:
+
+  imx6dl-efusa9          efusA9 with Solo or DualLite CPU
+  imx6q-efusa9           efusA9 with Quad CPU
+  imx6dl-armstonea9      armStoneA9 with Solo or DualLite CPU
+  imx6q-armstonea9       armStoneA9 with Quad CPU
+  imx6sx-efusa9x         efusA9X
+
+<build-dir> is the name of the build directory to create. We recommend
+a name that starts with "build" and holds the name of the board and
+the distro, e.g. "build-efusa9q-x11". This command will automatically
+switch to the newly created directory and sets the environment so that
+everything runs smoothly.
+
+You have to repeat this step in every new shell that should be used to
+build this Yocto image. For example if you restart your PC, you have
+to call this command again to set up the environment correctly again.
 
 
 Build an image
