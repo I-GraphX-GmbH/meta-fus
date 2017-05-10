@@ -1,4 +1,4 @@
-# Copyright (C) 2014 F&S Elektronik Systeme GmbH
+# Copyright (C) 2016 F&S Elektronik Systeme GmbH
 # Released under the GPLv2 license
 
 # ###
@@ -15,17 +15,9 @@ DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx6)"
 
-# ### For now we have the regular IMX kernel with an F&S patch
-#SRCBRANCH = "imx_3.10.17_1.0.1_ga"
-#SRCREV = "dac46dcf913585956a0e7a838e6f4b7465f00f57"
-#LOCALVERSION = "-1.0.1_ga"
-#SCMVERSION ?= "y"
-#SRC_URI = "git://git.freescale.com/imx/linux-2.6-imx.git;branch=${SRCBRANCH} \
-#	file://linux-3.10.17-fsimx6-Y0.2.patch"
-#S = "${WORKDIR}/git"
-
-SRC_URI = "file://linux-3.10.17-fsimx6-Y0.2.tar.bz2"
-S = "${WORKDIR}/linux-3.10.17-fsimx6-Y0.2"
+SRC_URI = "file://linux-4.1.15-fsimx6-Y0.4.tar.bz2"
+S = "${WORKDIR}/linux-4.1.15-fsimx6-Y0.4"
+PV = "0.4"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points
@@ -34,5 +26,5 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 FSCONFIG = "fsimx6_defconfig"
 
 kernel_do_configure_prepend() {
-	oe_runmake ${FSCONFIG}
+	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig
 }
