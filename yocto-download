@@ -20,7 +20,7 @@ fi
 # Download the Freescale Release BSP repo description for DIZZY
 echo "Getting download information (repo init)"
 DOWNLOAD_URL=git://git.freescale.com/imx/fsl-arm-yocto-bsp.git
-BRANCH=imx-3.14.38-6QP_ga
+BRANCH=imx-4.1.15-1.0.0_ga
 ./repo init -u $DOWNLOAD_URL -b $BRANCH
 
 # Download the GIT repositories. This is:
