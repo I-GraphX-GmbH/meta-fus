@@ -282,6 +282,41 @@ and then add it again to the final target image.
   bitbake <image-name>
 
 
+Add packages to an image
+------------------------
+
+If you want to add a package to your local build (in addition to the
+regular image content), you have to go to your build directory and
+open the file ./conf/local.conf. Here yo can add the package by
+listing it in IMAGE_INSTALL_append. Sometimes you also have to do
+additional steps like enabling a specific software license in variable
+LICENSE_FLAGS_WHITELIST. If the software is in a separate layer, check
+if the layer is already in conf/bblayers.conf and add the layer if it
+is missing.
+
+For example to add the Chromium browser on top of core-image-x11, you
+need to add the following two lines to the BBLAYERS variable in
+bblayers.conf (probably before the meta-f+s line)
+
+  ${BSPDIR}/sources/meta-openembedded/meta-gnome \
+  ${BSPDIR}/sources/meta-browser \
+
+Then you have to add the following lines to local.conf:
+
+  LICENSE_FLAGS_WHITELIST = " commercial_libav commercial_x264 commercial"
+  IMAGE_INSTALL_append = " chromium libexif"
+
+After these preparations, you can build your image:
+
+  bitbake core-image-x11
+
+Please note that building this image with Chromium needs lots of
+memory and time. About 50 GB of free hard disc space, about 11 GB of
+RAM when linking and more than eight hours build time even on a very
+fast computer. So do not try this on a small build machine, it will
+fail.
+
+
 Install U-Boot on the board
 ---------------------------
 
