@@ -3,5 +3,4 @@
 *.a
 *.o
 *~
-*.patch
 *.depend
