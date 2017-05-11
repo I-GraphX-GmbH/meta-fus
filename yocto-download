@@ -7,7 +7,8 @@
 set -e
 
 # List of possible board names that will be shown later
-BOARDS="imx6dl-efusa9 imx6dl-armstonea9 imx6sx-efusa9x"
+ARCHS="fsimx6q fsimx6dl fsimx6sx fsimx6ul"
+DISTROS="fsl-imx-x11 fsl-imx-wayland fsl-imx-xwayland fsl-imx-fb"
 
 # Download the repo tool that handles the download of several GIT repos
 if [ ! -x ./repo ]
@@ -38,20 +39,24 @@ echo "Downloading all Yocto packages (repo sync)"
 
 # Add the F&S layer to the bblayers.conf file
 echo "Adding F&S layer to bblayers"
-sed -i -e "/${BSPDIR}\/sources\/meta-fsl-demos/a\  \${BSPDIR}/sources/meta-f+s \\\\" sources/base/conf/bblayers.conf
+sed -i -e "/${BSPDIR}\/sources\/meta-fsl-demos/a\  \${BSPDIR}/sources/meta-fus \\\\" sources/base/conf/bblayers.conf
 
 # Say that we are done
 echo
 echo "-----------------------"
 echo
-echo "Yocto installation complete. You can now configure for an F&S board."
+echo "Yocto installation complete. You can now configure for an F&S system."
 echo
-echo "MACHINE=<board> source setup-environment <build-dir>"
+echo "DISTRO=<distro> MACHINE=<arch> . fsl-setup-release.sh -b <build-dir>"
 echo
-echo "<board> can be one of: $BOARDS"
+echo "Please note the extra dot for sourcing in the setup script."
+echo
+echo "<distro> can be one of: $DISTROS"
+echo "<arch> can be one of: $ARCHS"
 echo "<build-dir> is the name of the build directory to create. We recommend a"
-echo "name that starts with \"build\", e.g. \"build-efusa9\" if you are"
-echo "building for an efusA9 board."
+echo "name that starts with \"build\" and contains the machine and the distro,"
+echo "e.g. \"build-fsimx6sx-x11\" if you are building an x11 distro for a board"
+echo "in the fsimx6sx family, like the efusA9X."
 echo
 echo "You have to repeat this step in every new shell that should be used to"
 echo "build this Yocto image, for example after you have restarted your PC."
