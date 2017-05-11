@@ -7,8 +7,8 @@
 set -e
 
 # List of possible board names that will be shown later
-ARCHS="fsimx6q fsimx6dl fsimx6sx fsimx6ul"
-DISTROS="fsl-imx-x11 fsl-imx-wayland fsl-imx-xwayland fsl-imx-fb"
+ARCHS="fsimx6 fsimx6sx fsimx6ul"
+DISTROS="fus-imx-x11 fus-imx-wayland fus-imx-xwayland fus-imx-fb"
 
 # Download the repo tool that handles the download of several GIT repos
 if [ ! -x ./repo ]
