@@ -1,45 +1,31 @@
-fsimx6-Y0.4
-===========
+fsimx6sx-Y0.6
+=============
 
-This is an F&S pre-release for Yocto. At the moment it is only
-available for a small subset of F&S boards and modules (see below).
+This is an F&S pre-release for Yocto.
 
-This release is based on the Freescale Release BSP of Yocto which in
-turn is based on Yocto 2.0.1 (Jethro). It provides a U-Boot based on
-u-boot-2014.07 and a Linux kernel based on 3.14.52 (i.MX6 Solo-X) and
-4.1.15 (regular i.MX6) respectively.
+This release is based on the NXP/Freescale Release BSP of Yocto, which
+in turn is based on the NXP/Freescale Community BSP, which in turn is
+based on Yocto 2.1.1 (Krogoth). It provides a U-Boot based on
+u-boot-2014.07 and a Linux kernel based on 4.1.15.
 
-The following standard images were tested:
+The following F&S standard images were tested:
 
-1. core-image-minimal          (5 MB UBIFS)
-2. core-image-base	       (30 MB UBIFS)
-3. core-image-sato             (77 MB UBIFS)
-4. core-image-x11              (64 MB UBIFS)
-5. core-image-clutter          (82 MB UBIFS)
-6. fsl-image-multimedia        (159 MB UBIFS)
-7. fsl-image-multimedia-full   (167 MB UBIFS)
-8. fsl-image-machine-test      (300 MB UBIFS)
+Image           Architecture   X11 size    Wayland Size
+---------------------------------------------------------
+fus-image-std   fsimx6         109 MB      86 MB
+                fsimx6sx       109 MB      85 MB
+                fsimx6ul        94 MB      -
+fus-image-qt5   fsimx6         228 MB      201 MB
+                fsimx6sx       227 MB      200 MB
+                fsimx6ul       212 MB      -
 
-ATTENTION!
+Remark:
 
-This version will only work if the preferred package providers in
-sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/include are
-modified. The following settings must be removed so that they do not
-overwrite the F&S settings from the meta-f+s layer:
-
-In file fsl-imx-preferred-env.inc:
-
-  PREFERRED_PROVIDER_u-boot_mx6
-  PREFERRED_PROVIDER_u-boot_mx6ul
-  PREFERRED_PROVIDER_virtual/bootloader_mx6
-  PREFERRED_PROVIDER_virtual/bootloader_mx6ul
-  PREFERRED_PROVIDER_virtual/kernel_mx6
-  PREFERRED_PROVIDER_virtual/kernel_mx6ul
-
-In file fsl-imx-base.inc:
-
-  IMAGE_FSTYPES
-
+For historical reasons, the company name "Freescale" and the
+abbreviation "fsl" appear at several places in Yocto, despite the fact
+that this company has merged with NXP in the meantime and is called
+NXP now. We will use NXP/Freescale where appropriate to make this
+relation as clear as possible.
 
 
 About Yocto
@@ -54,13 +40,12 @@ repository where the end user can install additional packages from.
 Yocto is organized in layers. Layers may exist next to each other, but
 usually they have a hierarchical order, where the next layer is based
 on the previous layer. The F&S yocto release is actually only the
-Freescale Yocto Community BSP release, where an additional F&S layer
-is added on top to provide support for the boards and modules from
-F&S. The Freescale Community BSP release itself is based on the
-regular Yocto release and simlpy adds some Freescale layers, to
-support the Freescale CPUs and Evaluation Boards. Yocto itself is
-again based on Open Embedded, and adds some additional Yocto specific
-software layers, called "poky".
+NXP/Freescale Release BSP, where an additional F&S layer is added on top
+to provide support for the boards and modules from F&S. The NXP/Freescale
+Release BSP itself is based on the regular Yocto release and
+simlpy adds some NXP/Freescale layers, to support the NXP CPUs and
+Evaluation Boards. Yocto itself is again based on Open Embedded, and
+adds some additional Yocto specific software layers, called "poky".
 
 So at the core, Yocto is an Open Embedded based system. Open Embedded
 uses recipes, like they are used when baking a cake. The recipe
@@ -137,8 +122,8 @@ Installation
 First of all, unpack the F&S Yocto release. Yocto-only releases are
 marked with a 'Y' instead of a 'V' for the release version number.
 
-  tar xvf fsimx6-Y0.4.tar.bz2
-  cd fsimx6-Y0.4
+  tar xvf fsimx6sx-Y0.6.tar.bz2
+  cd fsimx6sx-Y0.6
 
 As mentioned above, the F&S Yocto release uses different layers from
 different sources. When installing, these layers are actually
@@ -156,8 +141,8 @@ This will take a few minutes, depending on your internet speed.
 The download is done by using a small tool called "repo" that is
 designed to handle several GIT repositories in parallel. So the first
 step of the skript is to download the repo tool. Then it fetches the
-repo description for the Freescale Community BSP release and finally
-lets repo download all the different GIT repositories with the Yocto
+repo description for the NXP/Freescale Release BSP and finally lets
+repo download all the different GIT repositories with the Yocto
 layers.
 
 - fsl-community-bsp-base
@@ -170,7 +155,7 @@ layers.
 - poky
 - meta-openembedded
 
-At the end it simply adds the F&S layer (called meta-f+s) to the
+At the end it simply adds the F&S layer (called meta-fus) to the
 configuration file bblayers.conf.
 
 
@@ -179,7 +164,7 @@ Configure for a board
 
 To configure for a specific F&S board, simply call
 
-  DISTRO=<distro> MACHINE=<board-name> . fsl-setup-release.sh -b <build-dir>
+  DISTRO=<distro> MACHINE=<arch> . fsl-setup-release.sh -b <build-dir>
 
 Please note the extra dot that is used to run the fsl-setup-release.sh
 (and the corresponding setup-environment script) in the current shell
@@ -187,22 +172,21 @@ by sourcing it and not spawning a new sub-shell.
 
 <distro> is one of the possible display solutions, one of:
 
-  fsl-imx-x11            Only X11 graphics
-  fsl-imx-wayland        Wayland/weston graphics
-  fsl-imx-xwayland       Wayland & X11 graphics; No EGL on X11 applications
-  fsl-imx-fb             Just framebuffer graphics, no X11, no Wayland
+  fus-imx-x11        Only X11 graphics
+  fus-imx-wayland    Wayland/weston graphics
+  fus-imx-xwayland   Wayland & X11 graphics; No EGL on X11 applications
+  fus-imx-fb         Just framebuffer graphics, no X11, no Wayland
 
-<board-name> can be one of the supported boards:
+<arch> can be one of the supported F&S architecture families:
 
-  imx6dl-efusa9          efusA9 with Solo or DualLite CPU
-  imx6q-efusa9           efusA9 with Quad CPU
-  imx6dl-armstonea9      armStoneA9 with Solo or DualLite CPU
-  imx6q-armstonea9       armStoneA9 with Quad CPU
-  imx6sx-efusa9x         efusA9X
+  fsimx6             Regular i.MX6 boards with Solo/DualLite/Quad CPU
+                     (armStoneA9, armStoneA9r2, efusA9, PicoMODA9, NetDCUA9)
+  fsimx6sx           Boards with i.MX6-SoloX CPU (efusA9X, PicoCOMA9X)
+  fsimx6ul           Boards with i.MX6-UltraLite CPU (efusA7UL, PicoCOM1.2)
 
 <build-dir> is the name of the build directory to create. We recommend
-a name that starts with "build" and holds the name of the board and
-the distro, e.g. "build-efusa9q-x11". This command will automatically
+a name that starts with "build" and holds the name of the architecture and
+the distro, e.g. "build-fsimx6sx-x11". This command will automatically
 switch to the newly created directory and sets the environment so that
 everything runs smoothly.
 
@@ -219,10 +203,10 @@ To build one of the demo images, simply call
   bitbake <image-name>
 
 Here <image-name> is one of the images listed above, for example
-core-image-minimal. This will download all the required source
-packages, patch them, configure them, compile them, and assemble them
-in a package system and in target images. This includes binaries for
-the bootloader, the Linux kernel and the root filesystem. Even the
+fus-image-std. This will download all the required source packages,
+patch them, configure them, compile them, and assemble them in a
+package system and in target images. This includes binaries for the
+bootloader, the Linux kernel and the root filesystem. Even the
 toolchain, that is used for compiling these packages is built during
 this process. Therefore building can take quite a long time, even
 several hours. For example the rather complex fsl-image-machine-test
@@ -235,17 +219,16 @@ The resulting files can be found in
 
   tmp/deploy/images
 
-The names are as follows. Please replace <board-name> with the board
-name that you configured your Yocto system with, e.g. imx6dl-efusa9 or
-imx6dl-armstonea9, and <image-name> with the name of the target image
-that you have built.
+The names are as follows. Please replace <arch> with the architecture
+name that you configured your Yocto system with, e.g. fsimx6sx, and
+<image-name> with the name of the target image that you have built.
 
-  uboot.nb0                          U-Boot binary (suited for NBoot)
-  uImage                             Linux kernel image for <board-name>
-  uImage-<board-name>.dtb            Device tree for <board-name>
-  <image-name>-<board-name>.ubifs    Image to be installed in NAND flash
-  <image-name>-<board-name>.ext3     ext3 image, e.g. to be used via NFS
-  <image-name>-<board-name>.sdcard   Image to be installed on an SD card
+  uboot.nb0                    U-Boot binary (suited for NBoot)
+  uImage                       Linux kernel image for <arch>
+  uImage-<board>.dtb           Device trees for all boards of <arch>
+  <image-name>-<arch>.ubifs    Image to be installed in NAND flash
+  <image-name>-<arch>.ext3     ext3 image, e.g. to be used via NFS
+  <image-name>-<arch>.sdcard   Image to be installed on an SD card
 
 If the build process fails at some time, you can fix the error and
 continue by calling the bitbake command again. This will skip all the
@@ -275,7 +258,7 @@ In addition, the fsl-image-machine-test creates an UBIFS image with a
 size of about 300MB. The UBIFS images are configured to be at most
 256MB of size. To compile this image, you have to modify the file
 
-  sources/meta-fsimx6/conf/machine/<board-name>.conf
+  sources/meta-fus/conf/distro/include/fus-common.inc
 
 to avoid an overflow of the UBIFS rootfs. Replace the line
 
@@ -309,7 +292,14 @@ The list may vary from package to package. For example when building a
 Linux kernel, there are further steps to build the kernel modules and
 the device tree binaries. In addition there is also always the special
 stage named "clean" to remove a package from the system, for example
-to rebuild it. 
+to rebuild it. You can show the list of possible task of a package
+with the command
+
+  bitbake -c listtasks <package>
+
+For example:
+
+  bitbake -c listtasks linux-fus
 
 Therefore to rebuild a single package, you usually execute the
 following sequence of commands. They clean and recompile the package
@@ -318,6 +308,20 @@ and then add it again to the final target image.
   bitbake -c clean <package>
   bitbake -c compile <package>
   bitbake <image-name>
+
+Here are some other examples, using the linux-fus package. To call
+menuconfig for the kernel, call:
+
+  bitbake -c menuconfig linux-fus
+
+To copy the kernel to the deploy/images directory:
+
+  bitbake -c deploy linux-fus
+
+Open a shell in the package directory where you can issue arbitrary
+commands:
+
+  bitbake -c devshell linux-fus
 
 
 Add packages to an image
@@ -332,9 +336,10 @@ LICENSE_FLAGS_WHITELIST. If the software is in a separate layer, check
 if the layer is already in conf/bblayers.conf and add the layer if it
 is missing.
 
-For example to add the Chromium browser on top of core-image-x11, you
-need to add the following two lines to the BBLAYERS variable in
-bblayers.conf (probably before the meta-f+s line)
+For example to add the Chromium browser on top of core-image-x11, the
+following two lines need to be present in the BBLAYERS variable in
+bblayers.conf. (This should be the case if you set up the build
+directory with fsl-setup-release.sh like shown above.)
 
   ${BSPDIR}/sources/meta-openembedded/meta-gnome \
   ${BSPDIR}/sources/meta-browser \
@@ -353,6 +358,12 @@ memory and time. About 50 GB of free hard disc space, about 11 GB of
 RAM when linking and more than eight hours build time even on a very
 fast computer. So do not try this on a small build machine, it will
 fail.
+
+Adding firefox works rather similar, here you need these lines instead:
+
+  LICENSE_FLAGS_WHITELIST = " commercial_libav commercial_x264 commercial"
+  IMAGE_INSTALL_append = " firefox libexif"
+
 
 
 Install U-Boot on the board
@@ -385,8 +396,8 @@ have a directory /tftpboot for this purpose. So copy the following
 files to it:
 
   cp uImage /tftpboot
-  cp uImage-<board-name>.dtb /tftpboot
-  cp <image-name>-<board-name>.ubifs /tftpboot
+  cp uImage-<board>.dtb /tftpboot
+  cp <image-name>-<arch>.ubifs /tftpboot
 
 Now on your board go to U-Boot. This is done by pressing a key while
 the Autostart countdown counts down. If you have not done it already,
@@ -402,14 +413,14 @@ Download and save the kernel image:
 
 Download and save the device tree data:
 
-  tftp uImage-<board-name>.dtb
+  tftp uImage-<board>.dtb
   nand erase.part FTD
   nand write $loadaddr FDT $filesize
 
 Download and save the rootfs image:
 
   ubi part TargetFS
-  tftp <image-name>-<board-name>.ubifs
+  tftp <image-name>-<arch>.ubifs
   ubi write $loadaddr rootfs $filesize
 
 Finally make sure that the boot strategy is set up for device trees.
@@ -452,7 +463,17 @@ There is quite a lot of documentation available at the Yocto homepage
   https://www.yoctoproject.org/documentation
   https://www.yoctoproject.org/documentation/active
 
-In addition you can also have a look at the Freescale documentation on
-github:
+In addition you can also have a look at the documentation of the
+NXP/Freescale Community BSP on github:
 
   https://github.com/Freescale/Documentation
+
+There is also a fine tool called bb that allows inspecting Yocto
+variables, list recipes and providers, show bitbake logs, search
+packages and recipes, show package contents and dependency structures,
+edit recipes, include and bbappend files, and similar things. You can
+clone it from github:
+
+  git clone https://github.com/kergoth/bb
+
+Then read README.md for installation instructions.
