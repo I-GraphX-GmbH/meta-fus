@@ -61,3 +61,8 @@ echo
 echo "You have to repeat this step in every new shell that should be used to"
 echo "build this Yocto image, for example after you have restarted your PC."
 echo
+echo "When in the build directory, you can use bitbake to build."
+echo
+echo "Examples:"
+echo "  bitbake fus-image-std        Build F&S standard image (Matchbox)"
+echo "  bitbake fus-image-qt5        Build F&S Qt5 image"
