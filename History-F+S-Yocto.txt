@@ -1,6 +1,26 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fus-Y0.6 (12.05.2017, pre-release)
+----------------------------------
+Supported architectures: fsimx6, fsimx6sx, fsimx6ul
+
+- Switch to fsl-yocto-L4.1.15-2.0.0-ga (Yocto 2.1.1, Krogoth)
+- u-boot-2014.07-fus-Y0.6 for all architectures (from 11.05.2017)
+- linux-4.1.15-fus-Y0.6 for all architectures (from 11.05.2017)
+- Combine fsimx6q.conf and fsimx6dl.conf to a common fsimx6.conf
+- The common settings with the PREVERRED_PROVIDERs is now done in the distro
+- Add fus-image-std image with X11 and matchbox based desktop
+- Add virtual keyboard incl. German layout to matchbox
+- Fix usage of ls in the Xsession file
+- Add F&S image fus-image-qt5 that adds Qt5 to fus-image-std
+- Improve yocto-download to show examples how to build F&S images
+- Remove *.patch from .gitignore to avoid missing patch files in GIT commits
+- Allow building Chromium and Firefox by removing them from the blacklist
+- Update README-yocto-f+s.txt to refelect current release
+
+
+
 fus-Y0.5 (11/2016, not officially released)
 -------------------------------------------
 Supported architectures: fsimx6q, fsimx6dl, fsimx6sx, fsimx6ul
