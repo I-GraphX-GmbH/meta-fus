@@ -1,4 +1,4 @@
-# Copyright (C) 2015 F&S Elektronik Systeme GmbH
+# Copyright (C) 2016 F&S Elektronik Systeme GmbH
 # Released under the GPLv2 license
 
 # ###
@@ -15,15 +15,17 @@ DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx6)"
 
-SRC_URI = "file://linux-3.14.52-fsimx6sx-Y0.2.tar.bz2"
-S = "${WORKDIR}/linux-3.14.52-fsimx6sx-Y0.2"
-PV="0.2"
+SRC_URI = "file://linux-4.1.15-fus-Y0.5.tar.bz2"
+S = "${WORKDIR}/linux-4.1.15-fus-Y0.5"
+PV = "0.5"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
-FSCONFIG = "fsimx6sx_defconfig"
+FSCONFIG_mx6 = "fsimx6_defconfig"
+FSCONFIG_mx6sx = "fsimx6sx_defconfig"
+FSCONFIG_mx6ul = "fsimx6ul_defconfig"
 
 kernel_do_configure_prepend() {
 	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig
