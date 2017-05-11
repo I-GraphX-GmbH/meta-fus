@@ -1,6 +1,23 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+fus-Y0.5 (11/2016, not officially released)
+-------------------------------------------
+Supported architectures: fsimx6q, fsimx6dl, fsimx6sx, fsimx6ul
+
+- Convert from board specific to architecture specific configurations; this
+  will handle much more boards and we need only one image per architecture
+- u-boot-2014.07-fus-Y0.5 for all architectures
+- linux-4.1.15-fus-Y0.5 for all architectures
+- Rename meta-f+s to meta-fus to avoid problems with regular expressions
+- Merge fsvybrid version again; however this does not work yet
+
+Remark:
+This version needs manual modifications in Freescale files to work.
+See README-yocto-f+s.txt for further instructions.
+
+
+
 fsimx6-Y0.4 (07/2016, not officially released)
 ----------------------------------------------
 Supported boards: efusA9X, efusA9, armStoneA9
