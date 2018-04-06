@@ -10,9 +10,9 @@ PROVIDES += "u-boot"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
 
-SRC_URI = "file://u-boot-2014.07-fus-Y0.6.tar.bz2"
-S = "${WORKDIR}/u-boot-2014.07-fus-Y0.6"
-PV = "0.6"
+SRC_URI = "file://u-boot-2014.07-fus-Y1.0.tar.bz2"
+S = "${WORKDIR}/u-boot-2014.07-fus-Y1.0"
+PV = "1.0"
 
 UBOOT_MAKE_TARGET = "all"
 COMPATIBLE_MACHINE = "(mx6|vf60)"
