@@ -1,0 +1,47 @@
+#!/bin/sh
+# Set up F&S environment
+
+login_tty=/dev/tty_fus
+default_tty=ttymxc0
+
+dostart=0
+dostop=0
+
+case "$1" in
+    start)
+	dostart=1
+	;;
+    stop)
+	dostop=1
+	;;
+    restart|reload)
+	dostop=1
+	dostart=1
+	;;
+    *)
+	echo $"Usage: $0 {start|stop|restart}"
+esac
+
+if [ $dostop -ne 0 ] ; then
+    # Remove symbolic link from login_tty
+    if [ -L $login_tty ] ; then
+	/bin/rm $login_tty
+    fi
+
+    echo "F&S environment stopped"
+fi
+
+if [ $dostart -ne 0 ] ; then
+    # Create symbolic link to login_tty (used by inittab)
+    if [ -e /sys/bdinfo/login_tty ] ; then
+	default_tty=$(cat /sys/bdinfo/login_tty)
+    fi
+    ln -s /dev/$default_tty $login_tty
+
+    # check if alsactl and file asound.state are available then load config
+    if [ -e /usr/sbin/alsactl ] && [ -e /var/lib/alsa/asound.state ] ; then
+	alsactl restore
+    fi
+
+    echo "F&S environment started"
+fi

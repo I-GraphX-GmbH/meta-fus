@@ -1,0 +1,60 @@
+#!/bin/sh
+# Start getty depending on bdinfo settings
+
+bdinfo=/sys/bdinfo
+devtty=/dev/tty_fus
+fsgetty=$(basename $0)
+
+# Get the login device into variable login_tty (default "null")
+get_login_tty()
+{
+    login_tty=
+    if [ -e $bdinfo/login_tty ] ; then
+	login_tty=$(cat $bdinfo/login_tty)
+    fi
+    if [ "x$login_tty" == "x" ] ; then
+	login_tty=null
+    fi
+}
+
+# Get speed of serial line into variable login_speed (default 115200)
+get_login_speed()
+{
+    login_speed=
+    if [ -e $bdinfo/login_speed ] ; then
+	login_speed=$(cat $bdinfo/login_speed)
+    fi
+    if [ "x$login_speed" == "x" ] ; then
+	login_speed=115200
+    fi
+}
+
+# Start a regular getty if we have a valid tty
+get_login_tty
+if [ $login_tty != null ] ; then
+    get_login_speed
+    logger -t $fsgetty "Starting getty on $login_tty with speed $login_speed"
+    exec /sbin/getty -L $login_tty $login_speed vt100
+fi
+
+logger -t $fsgetty "No login requested, going to sleep"
+
+# Sleep forever; wake up every second to check if login_tty has changed
+while [ true ] ; do
+    sleep 1
+    get_login_tty
+    if [ $login_tty != null ] ; then
+	break
+    fi
+done
+
+# Update the symbolic link to the new device
+if [ -L $devtty ] ; then
+    /bin/ln -sf $devtty $login_tty
+fi
+
+logger -t $fsgetty "Switched login_tty to $login_tty, waiting for restart"
+
+# Exit this fsgetty instance; because of the respawn feature in inittab, we
+# will be called again in a moment and start the real getty (see above)
+exit 0
