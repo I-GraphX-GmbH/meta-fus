@@ -51,6 +51,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     iw \
     openssh \
     wpa-supplicant \
+    hostapd \
     liberation-fonts \
     firmware-imx \
     linux-firmware-wl12xx \
@@ -65,3 +66,4 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     shutdown-desktop \
     libsdl', '', d)} \
 "
+
