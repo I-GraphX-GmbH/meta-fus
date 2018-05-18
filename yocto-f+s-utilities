@@ -17,7 +17,7 @@ list_non_fsl_target_boards()
 
 list_f+s_target_boards()
 {
-[ -f conf/local.conf ] && ls -1 ../sources/meta-f+s/conf/machine/*.conf
+[ -f conf/local.conf ] && ls -1 ../sources/meta-fus/conf/machine/*.conf
 }
 
 list_target_images()
