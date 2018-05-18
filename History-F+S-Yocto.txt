@@ -1,6 +1,22 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-2.1.1-fsimx6-Y1.0 (18.05.2018, based on Yocto 2.1.1 Krogoth)
+------------------------------------------------------------------
+Supported architectures: fsimx6, fsimx6sx, fsimx6ul
+
+- u-boot-2014.07-fus-Y1.0 for all architectures
+- linux-4.1.5-fus-Y1.0 for all architectures
+- Add new device trees (QBlissA9, QBlissA9r2, etc.)
+- Add fsgetty and audio chip configuration
+- Add package hostapd
+- Add possibility to remove kernel modules
+- Add package silex-wlan-fs for F&S boards with SX/UL CPU
+- Fix bad meta-fus in yocto-f+s-utilities
+- Move README-yocto-f+s.txt to fsbuild
+
+
+
 fus-Y0.6 (12.05.2017, pre-release)
 ----------------------------------
 Supported architectures: fsimx6, fsimx6sx, fsimx6ul
