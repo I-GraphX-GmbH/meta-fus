@@ -10,7 +10,7 @@ SUMMARY = "Linux Kernel for F&S i.MX6-based boards and modules"
 
 DEPENDS += "lzop-native bc-native"
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx7)"
 
 SRC_URI = "file://linux-4.1.15-fus-Y1.0.tar.bz2"
 S = "${WORKDIR}/linux-4.1.15-fus-Y1.0"
@@ -23,6 +23,7 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 FSCONFIG_mx6 = "fsimx6_defconfig"
 FSCONFIG_mx6sx = "fsimx6sx_defconfig"
 FSCONFIG_mx6ul = "fsimx6ul_defconfig"
+FSCONFIG_mx7ulp = "fsimx7ulp_defconfig"
 
 kernel_do_configure_prepend() {
 	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig

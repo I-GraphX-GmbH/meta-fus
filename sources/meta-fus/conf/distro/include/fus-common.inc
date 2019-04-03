@@ -4,18 +4,22 @@ UBOOT_ENTRYPOINT = "0x80800000"
 UBOOT_ENTRYPOINT_mx6 = "0x10800000"
 UBOOT_ENTRYPOINT_mx6sx = "0x80800000"
 UBOOT_ENTRYPOINT_mx6ul = "0x80800000"
+UBOOT_ENTRYPOINT_mx7ulp = "0x60800000"
 
 PREFERRED_PROVIDER_u-boot_mx6 = "u-boot-fus"
 PREFERRED_PROVIDER_u-boot_mx6ul = "u-boot-fus"
 PREFERRED_PROVIDER_u-boot_mx6sx = "u-boot-fus"
+PREFERRED_PROVIDER_u-boot_mx7ulp = "u-boot-fus-fsimx7ulp"
 
 PREFERRED_PROVIDER_virtual/bootloader_mx6 = "u-boot-fus"
 PREFERRED_PROVIDER_virtual/bootloader_mx6ul = "u-boot-fus"
 PREFERRED_PROVIDER_virtual/bootloader_mx6sx = "u-boot-fus"
+PREFERRED_PROVIDER_virtual/bootloader_mx7ulp = "u-boot-fus-fsimx7ulp"
 
 PREFERRED_PROVIDER_virtual/kernel_mx6 = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx6ul = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx6sx = "linux-fus"
+PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-fus"
 
 IMAGE_FSTYPES = "ubifs ext3 sdcard"
 MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"
