@@ -8,8 +8,6 @@ inherit kernel
 
 SUMMARY = "Linux Kernel for F&S i.MX6-based boards and modules"
 
-require recipes-kernel/linux/linux-dtb.inc
-
 DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx6)"

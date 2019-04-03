@@ -32,3 +32,9 @@ MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"
 # image_types_fsl.bbclass
 IMAGE_CLASSES_remove = "image_types_fsl"
 IMAGE_CLASSES += "image_types_fus"
+
+# necessary, will be set in fsl-imx-preferred-env.inc
+UBOOT_SUFFIX_mx6ul = "nb0"
+UBOOT_MAKE_TARGET_mx6ul = ""
+
+DISTRO_NAME = "F&S i.MX Release Distro"

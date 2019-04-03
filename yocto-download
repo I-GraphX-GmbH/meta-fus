@@ -20,9 +20,10 @@ fi
 
 # Download the Freescale Release BSP repo description for DIZZY
 echo "Getting download information (repo init)"
-DOWNLOAD_URL=git://git.freescale.com/imx/fsl-arm-yocto-bsp.git
-BRANCH=imx-4.1-krogoth
-./repo init -u $DOWNLOAD_URL -b $BRANCH
+DOWNLOAD_URL=https://source.codeaurora.org/external/imx/imx-manifest
+BRANCH=imx-linux-rocko
+MANIFEST=imx-4.9.88-2.0.0_ga.xml
+./repo init -u $DOWNLOAD_URL -b $BRANCH -m $MANIFEST
 
 # Download the GIT repositories. This is:
 #  - fsl-community-bsp-base
@@ -39,7 +40,7 @@ echo "Downloading all Yocto packages (repo sync)"
 
 # Add the F&S layer to the bblayers.conf file
 echo "Adding F&S layer to bblayers"
-sed -i -e "/${BSPDIR}\/sources\/meta-fsl-demos/a\  \${BSPDIR}/sources/meta-fus \\\\" sources/base/conf/bblayers.conf
+sed -i -e "/${BSPDIR}\/sources\/meta-freescale-distro/a\  \${BSPDIR}/sources/meta-fus \\\\" sources/base/conf/bblayers.conf
 
 # Say that we are done
 echo
