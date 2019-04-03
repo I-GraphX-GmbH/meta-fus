@@ -41,6 +41,9 @@ echo "Downloading all Yocto packages (repo sync)"
 # Add the F&S layer to the bblayers.conf file
 echo "Adding F&S layer to bblayers"
 sed -i -e "/${BSPDIR}\/sources\/meta-freescale-distro/a\  \${BSPDIR}/sources/meta-fus \\\\" sources/base/conf/bblayers.conf
+# Modify recipe optee-os-imx_git.bb
+# TODO: check a better way to support our board or remove recipe
+sed -i -e "/else:/i\\\telif re.match('fs',machine):\n\t\tsubplatform = machine[1:]" sources/meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/optee-os-imx_git.bb
 
 # Say that we are done
 echo
