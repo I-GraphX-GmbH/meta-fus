@@ -58,7 +58,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     linux-firmware-wl18xx \
     linux-firmware-sd8787 \
     v4l-utils \
-    fs-startscript \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im matchbox-panel-2 \
