@@ -25,6 +25,10 @@ FSCONFIG_mx6sx = "fsimx6sx_defconfig"
 FSCONFIG_mx6ul = "fsimx6ul_defconfig"
 FSCONFIG_mx7ulp = "fsimx7ulp_defconfig"
 
+# Prevent the galcore-module from beeing build, because it is already
+# included in the F&S-Linux-Kernel as a build-in
+RPROVIDES_kernel-image += "kernel-module-imx-gpu-viv"
+
 kernel_do_configure_prepend() {
 	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig
 }
