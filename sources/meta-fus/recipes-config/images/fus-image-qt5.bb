@@ -31,6 +31,9 @@ QT5_IMAGE_INSTALL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${Q
 QT5_IMAGE_INSTALL_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-plugins', d)}"
 
+QT5_IMAGE_INSTALL_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland','${QT5_IMAGE_INSTALL_common}', \
+    'qtbase qtbase-examples qtbase-plugins', d)}"
+
 QT5_IMAGE_INSTALL_imxgpu3d = " \
     ${QT5_IMAGE_INSTALL_common} \
     gstreamer1.0-plugins-bad-qt"
