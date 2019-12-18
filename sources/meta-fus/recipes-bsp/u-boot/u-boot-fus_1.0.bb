@@ -8,7 +8,7 @@ DESCRIPTION = "bootloader for F&S boards and modules based on Freescale i.MX6"
 PROVIDES += "u-boot"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 SRC_URI = "file://u-boot-2014.07-fus-Y1.0.tar.bz2"
 S = "${WORKDIR}/u-boot-2014.07-fus-Y1.0"
