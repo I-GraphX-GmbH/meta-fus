@@ -21,7 +21,8 @@ PREFERRED_PROVIDER_virtual/kernel_mx6ul = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx6sx = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-fus"
 
-IMAGE_FSTYPES = "ubifs ext3 sdcard"
+IMAGE_FSTYPES = "ubifs sdcard"
+
 MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"
 
 # Remove image_types_fsl because there is a awk command which search after a
@@ -42,3 +43,4 @@ UBOOT_SUFFIX_mx6ul = "nb0"
 UBOOT_MAKE_TARGET_mx6ul = ""
 
 DISTRO_NAME = "F&S i.MX Release Distro"
+SANITY_TESTED_DISTROS += "fedora-27"

@@ -64,5 +64,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     matchbox-desktop matchbox-terminal \
     shutdown-desktop \
     libsdl', '', d)} \
+	fs-startscript \
 "
 
