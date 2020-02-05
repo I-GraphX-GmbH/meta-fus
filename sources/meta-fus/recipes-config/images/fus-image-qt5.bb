@@ -18,21 +18,20 @@ QT5_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-s
 MACHINE_QT5_MULTIMEDIA_APPS = ""
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
+    qtbase \
     packagegroup-fus-qt5 \
     ${QT5_FONTS} \
     ${QT5_IMAGE_INSTALL_APPS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}\
     "
-
+# Only QT on X11 support for now
 QT5_IMAGE_INSTALL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-plugins', d)}"
 
-QT5_IMAGE_INSTALL_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
-    'qtbase qtbase-examples qtbase-plugins', d)}"
-
-QT5_IMAGE_INSTALL_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland','${QT5_IMAGE_INSTALL_common}', \
-    'qtbase qtbase-examples qtbase-plugins', d)}"
+#  Install QT for x11 AND weston for fsimx6ull
+QT5_IMAGE_INSTALL_imxpxp = " \
+	${QT5_IMAGE_INSTALL_common}"
 
 QT5_IMAGE_INSTALL_imxgpu3d = " \
     ${QT5_IMAGE_INSTALL_common} \
