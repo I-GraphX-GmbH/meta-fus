@@ -12,6 +12,8 @@ do
     case $setup_flag in
         b) BUILD_DIR="$OPTARG";
 		;;
+		m) FS_MODE="$OPTARG";
+		;;
 		h) SHOW_HELP="1";
     esac
 done
@@ -47,6 +49,19 @@ DISTRO=$DISTRO MACHINE=$MACHINE . $FSL_SETUP_RELEASE -b $BUILD_DIR
 # Add FuS-Layer
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus \"" >> $BUILD_DIR/conf/bblayers.conf
+
+# Determine root file system mode
+if [ "$FS_MODE" != "rw" ]
+then
+	echo "" >> $BUILD_DIR/conf/local.conf
+	echo "# Remove this to make your file system read-writeable:" >> $BUILD_DIR/conf/local.conf
+	echo "EXTRA_IMAGE_FEATURES += \"read-only-rootfs \"" >> $BUILD_DIR/conf/local.conf
+	echo
+	echo "Building read-only root file system"
+else
+	echo
+	echo "Building read/write root file system"
+fi
 
 # We remove the optee layer from the build for now because it causes trouble with the machine
 # name and we do not support optee on our boards so far.

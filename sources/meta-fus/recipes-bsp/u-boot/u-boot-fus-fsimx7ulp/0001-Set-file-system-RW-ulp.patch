@@ -1,0 +1,13 @@
+diff --git a/board/F+S/fsimx7ulp/fsimx7ulp.c b/board/F+S/fsimx7ulp/fsimx7ulp.c
+index 8be43b4..c5e8329 100644
+--- a/board/F+S/fsimx7ulp/fsimx7ulp.c
++++ b/board/F+S/fsimx7ulp/fsimx7ulp.c
+@@ -197,7 +425,7 @@ int board_late_init(void)
+ 	setup_var("bootdelay", "3", 0);
+ 	setup_var("bootauxfile", "power_mode_switch.img", 0);
+ 	/* Set some variables by runnning another variable */
+-	setup_var("mode", ".mode_ro", 1);
++	setup_var("mode", ".mode_rw", 1);
+ 	setup_var("console", ".console_serial", 1);
+ 	setup_var("login", ".login_serial", 1);
+ 	setup_var("init", ".init_init", 1);
