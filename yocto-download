@@ -3,12 +3,10 @@
 # This script downloads the Freescale Yocto Community BSP release and adds
 # the F&S layer to it.
 
+source ./yocto-f+s-utilities
+
 # Cause script to stop on errors, e.g. if download fails
 set -e
-
-# List of possible board names that will be shown later
-ARCHS="fsimx6 fsimx6sx fsimx6ul"
-DISTROS="fus-imx-x11 fus-imx-wayland fus-imx-xwayland fus-imx-fb"
 
 # Download the repo tool that handles the download of several GIT repos
 if [ ! -x ./repo ]
@@ -38,35 +36,13 @@ MANIFEST=imx-4.9.88-2.0.0_ga.xml
 echo "Downloading all Yocto packages (repo sync)"
 ./repo sync
 
-# Add the F&S layer to the bblayers.conf file
-echo "Adding F&S layer to bblayers"
-sed -i -e "/${BSPDIR}\/sources\/meta-freescale-distro/a\  \${BSPDIR}/sources/meta-fus \\\\" sources/base/conf/bblayers.conf
 # Modify recipe optee-os-imx_git.bb
 # TODO: check a better way to support our board or remove recipe
 sed -i -e "/else:/i\\\telif re.match('fs',machine):\n\t\tsubplatform = machine[1:]" sources/meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/optee-os-imx_git.bb
 
-# Say that we are done
-echo
-echo "-----------------------"
-echo
-echo "Yocto installation complete. You can now configure for an F&S system."
-echo
-echo "DISTRO=<distro> MACHINE=<arch> . fsl-setup-release.sh -b <build-dir>"
-echo
-echo "Please note the extra dot for sourcing in the setup script."
-echo
-echo "<distro> can be one of: $DISTROS"
-echo "<arch> can be one of: $ARCHS"
-echo "<build-dir> is the name of the build directory to create. We recommend a"
-echo "name that starts with \"build\" and contains the machine and the distro,"
-echo "e.g. \"build-fsimx6sx-x11\" if you are building an x11 distro for a board"
-echo "in the fsimx6sx family, like the efusA9X."
-echo
-echo "You have to repeat this step in every new shell that should be used to"
-echo "build this Yocto image, for example after you have restarted your PC."
-echo
-echo "When in the build directory, you can use bitbake to build."
-echo
-echo "Examples:"
-echo "  bitbake fus-image-std        Build F&S standard image (Matchbox)"
-echo "  bitbake fus-image-qt5        Build F&S Qt5 image"
+# Remove link to fsl-setup-release.sh as it is called directly in
+# fus-setup-release.sh
+rm fsl-setup-release.sh
+
+# Print user manual form yocto-f+s-utilities
+print_usage
