@@ -36,9 +36,6 @@ MANIFEST=imx-4.9.88-2.0.0_ga.xml
 echo "Downloading all Yocto packages (repo sync)"
 ./repo sync
 
-# Modify recipe optee-os-imx_git.bb
-# TODO: check a better way to support our board or remove recipe
-sed -i -e "/else:/i\\\telif re.match('fs',machine):\n\t\tsubplatform = machine[1:]" sources/meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/optee-os-imx_git.bb
 
 # Remove link to fsl-setup-release.sh as it is called directly in
 # fus-setup-release.sh

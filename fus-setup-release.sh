@@ -48,3 +48,9 @@ DISTRO=$DISTRO MACHINE=$MACHINE . $FSL_SETUP_RELEASE -b $BUILD_DIR
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus \"" >> $BUILD_DIR/conf/bblayers.conf
 
+# We remove the optee layer from the build for now because it causes trouble with the machine
+# name and we do not support optee on our boards so far.
+echo "" >> $BUILD_DIR/conf/local.conf
+echo "# We remove the optee layer from the build for now because it causes trouble with the machine" >> $BUILD_DIR/conf/local.conf
+echo "# name and we do not support optee on our boards so far." >> $BUILD_DIR/conf/local.conf
+echo "BBMASK += \"meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/ \"" >> $BUILD_DIR/conf/local.conf
