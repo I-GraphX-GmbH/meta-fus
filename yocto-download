@@ -36,6 +36,10 @@ MANIFEST=imx-4.9.88-2.0.0_ga.xml
 echo "Downloading all Yocto packages (repo sync)"
 ./repo sync
 
+# Download mono layer
+DOWNLOAD_URL=http://git.yoctoproject.org/cgit/cgit.cgi/meta-mono
+BRANCH=rocko
+git clone $DOWNLOAD_URL sources/meta-mono -b $BRANCH
 
 # Remove link to fsl-setup-release.sh as it is called directly in
 # fus-setup-release.sh
