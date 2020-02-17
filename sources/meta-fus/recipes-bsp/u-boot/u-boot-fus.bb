@@ -10,10 +10,10 @@ PROVIDES += "u-boot"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRC_URI = "file://u-boot-fus.tar.bz2"
+SRC_URI = "file://u-boot-2018.03-fus.tar.bz2"
 # Set the u-boot environment variable "mode" to rw if it is not a read-only-rootfs
 SRC_URI += '${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "", "file://0001-Set-file-system-RW.patch",d)}'
-S = "${WORKDIR}/u-boot-fus"
+S = "${WORKDIR}/u-boot-2018.03-fus"
 
 
 UBOOT_MAKE_TARGET = "all"

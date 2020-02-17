@@ -12,8 +12,8 @@ DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
 
-SRC_URI = "file://linux-fus.tar.bz2"
-S = "${WORKDIR}/linux-fus"
+SRC_URI = "file://linux-4.9.88-fus.tar.bz2"
+S = "${WORKDIR}/linux-4.9.88-fus"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points

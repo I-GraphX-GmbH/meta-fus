@@ -11,10 +11,10 @@ DEPENDS_append = " python dtc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRC_URI = "file://u-boot-fus-fsimx7ulp.tar.bz2"
+SRC_URI = "file://u-boot-2017.03-fsimx7ulp.tar.bz2"
 # Set the u-boot environment variable "mode" to rw if it is not a read-only-rootfs
 SRC_URI += '${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "", "file://0001-Set-file-system-RW-ulp.patch",d)}'
-S = "${WORKDIR}/u-boot-fsimx7ulp"
+S = "${WORKDIR}/u-boot-2017.03-fsimx7ulp"
 
 UBOOT_MAKE_TARGET = "all"
 COMPATIBLE_MACHINE = "(mx7ulp)"
