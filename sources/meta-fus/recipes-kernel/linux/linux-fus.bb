@@ -12,9 +12,8 @@ DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
 
-SRC_URI = "file://linux-4.1.15-fus-Y1.0.tar.bz2"
-S = "${WORKDIR}/linux-4.1.15-fus-Y1.0"
-PV = "1.0"
+SRC_URI = "file://linux-fus.tar.bz2"
+S = "${WORKDIR}/linux-fus"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points
@@ -28,6 +27,11 @@ FSCONFIG_mx7ulp = "fsimx7ulp_defconfig"
 # Prevent the galcore-module from beeing build, because it is already
 # included in the F&S-Linux-Kernel as a build-in
 RPROVIDES_kernel-image += "kernel-module-imx-gpu-viv"
+
+do_extraunpack () {
+	mv ${WORKDIR}/linux-fus/* ${S}/
+}
+
 
 kernel_do_configure_prepend() {
 	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig
