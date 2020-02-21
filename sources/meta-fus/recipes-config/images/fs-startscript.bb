@@ -6,7 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 PR = "r0"
 
-SRC_URI = "file://fsdistro-x11.sh"
+SRC_URI = "file://fsdistro-x11.sh file://fsalias.sh"
 
 HAS_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
@@ -16,5 +16,7 @@ do_install() {
     if [ "${HAS_X11}" = "yes" ]; then
 		install -m 0755 ${WORKDIR}/fsdistro-x11.sh  ${D}${sysconfdir}/profile.d/
     fi
+
+	install -m 0755 ${WORKDIR}/fsalias.sh  ${D}${sysconfdir}/profile.d/
 
 }
