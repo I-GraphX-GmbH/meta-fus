@@ -52,7 +52,7 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mono \"" >> $BUILD_DIR/conf/bblayer
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus \"" >> $BUILD_DIR/conf/bblayers.conf
 
 # Determine root file system mode
-if [ "$FS_MODE" != "rw" ]
+if [ "$FS_MODE" == "ro" ]
 then
 	echo "" >> $BUILD_DIR/conf/local.conf
 	echo "# Remove this to make your file system read-writeable:" >> $BUILD_DIR/conf/local.conf

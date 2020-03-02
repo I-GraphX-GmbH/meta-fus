@@ -55,7 +55,7 @@ print_usage()
 	echo "  -b          set name of the build directory"
 	echo "              default is \"build-$MACHINE-$DISTRO\""
 	echo "  -m [rw/ro]  create  read-write/read-only root file system"
-	echo "              default is read-only"
+	echo "              default is read-write"
 	echo "              can be changed later by removing or adding the"
 	echo "              EXTRA_IMAGE_FEATURES=\"read-only-rootfs\" from your local.conf"
 	echo "  -h          shows this help"
