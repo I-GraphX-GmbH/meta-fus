@@ -17,3 +17,11 @@ SRC_URI += " \
 		file://0005-Bluetoothd-Service-Enable-Compatibility-Mode.patch \
 		file://0006-Fix-GATT-Glib-WARNING.patch \
 "
+# We disable the automatic start of the bluetooth.service, because
+# it starts the bluetoothd daemon, which at this stage tries to
+# get the host name via hostnamed.service. The net namespace feature
+# is not activated in the Linux Kernel by now, so it fails.
+# The bluetoothd daemon has to be stated by hand after boot up.
+
+inherit systemd
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
