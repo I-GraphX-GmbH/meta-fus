@@ -1,6 +1,41 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-2.4-fsimx6-Y2020.03 (20.03.2020 based on Yocto 2.4 Rocko)
+------------------------------------------------------------------
+Supported architectures: fsimx6
+
+- Update yocto to 2.4 (Rocko)
+- Fix recipe failure optee-os-imx_git.bb
+- Add support for fsimx7ulp
+- Improve asound.state file for alsamixer
+- Remove fs-startscript from fus-image-std
+- Fix some errors so yocto-rocko can be build
+- Add new WLAN-driver based on B2019.11 release
+- Update pseudo to version 1.9 to fix host-user-contaminated warning
+- Fix fus-image-qt5
+- Add support for wayland and x11 on imx6ul
+- Fix licence file ckecksum for u-boot
+- Fix different minor things
+- add devicetree for gar2
+- Fix installation of QT-fonts only for wayland bug
+- Rework yocto built enviroment creation
+- Remove optee package from the built environment
+- Add read-only filesystem option to fus-images
+- Add fus-image-mono
+- Update .gitignore
+- Improve naming of Linux-kernel and Uboot in recipes
+- Fix Linux-kernel and Uboot recipes
+- Add fsalias.sh to fus-images
+- Add DISTRO variable to fus-distros
+- Add DISTRO variable to fus-imx-wayland
+- Set root file systems rw by default again
+- Remove matchbox from xwayland build
+- Fix failed hostname service on armstonea9r2
+- Add setting login console via bdinfo for imx6_all
+
+
+
 yocto-2.1.1-fsimx6-Y1.0 (18.05.2018, based on Yocto 2.1.1 Krogoth)
 ------------------------------------------------------------------
 Supported architectures: fsimx6, fsimx6sx, fsimx6ul
