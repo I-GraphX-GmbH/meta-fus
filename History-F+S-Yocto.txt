@@ -1,6 +1,13 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-2.4-fsimx6x-Y2020.03 (24.03.2020 based on Yocto 2.4 Rocko)
+------------------------------------------------------------------
+Supported architectures: fsimx6, fsimx6x
+
+
+
+
 yocto-2.4-fsimx6-Y2020.03 (20.03.2020 based on Yocto 2.4 Rocko)
 ------------------------------------------------------------------
 Supported architectures: fsimx6
