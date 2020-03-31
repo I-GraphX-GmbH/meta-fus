@@ -65,6 +65,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     shutdown-desktop \
     libsdl', '', d)} \
 	fs-startscript \
+	${@bb.utils.contains('MACHINE_FEATURES', 'wlan-sd8997 ', 'linux-firmware-wlan-sd8997', '', d)} \
 "
 CORE_IMAGE_EXTRA_INSTALL_remove += " \
 ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im matchbox-panel-2 \
