@@ -22,6 +22,7 @@ PREFERRED_PROVIDER_virtual/kernel_mx6sx = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-fus"
 
 IMAGE_FSTYPES = "ubifs sdcard"
+IMAGE_FSTYPES_mx7ulp  = "sdcard"
 
 MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"
 
