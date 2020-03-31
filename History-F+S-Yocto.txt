@@ -1,6 +1,17 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-2.4-fsimx7ulp-Y2020.03 (31.03.2020 based on Yocto 2.4 Rocko)
+------------------------------------------------------------------
+Supported architectures: fsimx6, fsimx6x, fsimx6ul fsimx7ulp
+
+- Remove ubifs image filesystem from fsimx7ulp build
+- Add support for Marvell SD8997 wlan chip
+- Set FUS_LOGIN_CONSOLE as default login for fsimx7ulp
+- Replace imx asound.conf file as is not compatible with our boards
+
+
+
 yocto-2.4-fsimx6ul-Y2020.03 (26.03.2020 based on Yocto 2.4 Rocko)
 ------------------------------------------------------------------
 Supported architectures: fsimx6, fsimx6x, fsimx6ul
