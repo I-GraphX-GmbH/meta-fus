@@ -19,8 +19,8 @@ fi
 # Download the Freescale Release BSP repo description for DIZZY
 echo "Getting download information (repo init)"
 DOWNLOAD_URL=https://source.codeaurora.org/external/imx/imx-manifest
-BRANCH=imx-linux-rocko
-MANIFEST=imx-4.9.88-2.0.0_ga.xml
+BRANCH=imx-linux-sumo
+MANIFEST=imx-4.14.98-2.3.0.xml
 ./repo init -u $DOWNLOAD_URL -b $BRANCH -m $MANIFEST
 
 # Download the GIT repositories. This is:
@@ -38,7 +38,7 @@ echo "Downloading all Yocto packages (repo sync)"
 
 # Download mono layer
 DOWNLOAD_URL=http://git.yoctoproject.org/cgit/cgit.cgi/meta-mono
-BRANCH=rocko
+BRANCH=sumo
 git clone $DOWNLOAD_URL sources/meta-mono -b $BRANCH
 
 # Remove link to fsl-setup-release.sh as it is called directly in
