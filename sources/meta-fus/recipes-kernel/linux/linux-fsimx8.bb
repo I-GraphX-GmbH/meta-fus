@@ -1,4 +1,4 @@
-# Copyright (C) 2016 F&S Elektronik Systeme GmbH
+# Copyright (C) 2020 F&S Elektronik Systeme GmbH
 # Released under the GPLv2 license
 
 LICENSE = "GPLv2"
@@ -20,6 +20,7 @@ S = "${WORKDIR}/linux-4.14.98-fus"
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
 FSCONFIG_mx8mm = "fsimx8mm_defconfig"
+FSCONFIG_mx8m = "fsimx8m_defconfig"
 
 # Prevent the galcore-module from beeing build, because it is already
 # included in the F&S-Linux-Kernel as a build-in
