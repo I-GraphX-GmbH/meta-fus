@@ -18,6 +18,8 @@ S = "${WORKDIR}/u-boot-2018.03-fus"
 
 inherit fsl-u-boot-localversion
 
+# Local archiv doesn't have git hash. Use env. LOCALVERSION env. for .scmversion
+SCMVERSION = "n"
 LOCALVERSION ?= "-4.14.98-2.3.0"
 
 BOOT_TOOLS = "imx-boot-tools"
