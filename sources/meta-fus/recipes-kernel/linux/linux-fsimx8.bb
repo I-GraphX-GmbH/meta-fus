@@ -2,7 +2,7 @@
 # Released under the GPLv2 license
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
@@ -12,8 +12,8 @@ DEPENDS += "lzop-native bc-native"
 
 COMPATIBLE_MACHINE = "(mx8)"
 
-SRC_URI = "file://linux-4.14.98-fus.tar.bz2"
-S = "${WORKDIR}/linux-4.14.98-fus"
+SRC_URI = "file://linux-5.4.24_2.1.0-fus.tar.bz2"
+S = "${WORKDIR}/linux-5.4.24_2.1.0-fus"
 
 # We need to pass it as param since kernel might support more then one
 # machine, with different entry points

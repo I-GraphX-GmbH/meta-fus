@@ -33,7 +33,7 @@ PREFERRED_PROVIDER_virtual/kernel_mx8mm = "linux-fsimx8"
 PREFERRED_PROVIDER_virtual/kernel_mx8m = "linux-fsimx8"
 PREFERRED_PROVIDER_virtual/kernel_mx8mn = "linux-fsimx8"
 
-IMAGE_FSTYPES = "ubifs sdcard"
+IMAGE_FSTYPES = "ubifs ext4 wic.gz"
 IMAGE_FSTYPES_mx7ulp  = "sdcard"
 
 MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"

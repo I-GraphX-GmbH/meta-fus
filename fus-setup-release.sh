@@ -41,7 +41,7 @@ fi
 
 
 # Path to fsl-setup-release.sh script
-FSL_SETUP_RELEASE=sources/meta-fsl-bsp-release/imx/tools/fsl-setup-release.sh
+FSL_SETUP_RELEASE=sources/meta-imx/tools/imx-setup-release.sh
 
 # Call NXPs fsl_setup_release script
 DISTRO=$DISTRO MACHINE=$MACHINE . $FSL_SETUP_RELEASE -b $BUILD_DIR
