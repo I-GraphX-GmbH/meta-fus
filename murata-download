@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# This script downloads the murata wireless layer
+
+#variables
+LAYER_DIR="sources"
+LAYER_NAME="meta-fus-murata-wireless"
+
+# Cause script to stop on errors, e.g. if download fails
+set -e
+
+# Download the murata wireless layer
+DOWNLOAD_URL=https://github.com/murata-wireless/meta-murata-wireless.git
+TAG=imx-zeus-gamera_r1.0
+git clone $DOWNLOAD_URL -b $TAG $LAYER_DIR/$LAYER_NAME
+
+echo "Download murata wireless layer successful!"
+
+# while downloading we renamed it and now modify it
+mv $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-imx_5.4.bbappend $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend
+mv $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-imx-5.4 $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files
+
+# rename patch folder in recipe
+mv $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend_tmp
+sed -e 's|FILESEXTRAPATHS_prepend := "\${THISDIR}/\${PN}-\${PV}:"|FILESEXTRAPATHS_prepend := "\${THISDIR}/files:"|' $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend_tmp > $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend
+rm $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/linux-fsimx8.bbappend_tmp
+
+# modify patch to apply successfully
+mv $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files/0002-murata-dts-3.3v.patch $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files/0002-murata-dts-3.3v.patch_tmp
+sed -e 's|@@ -631,11 +644,15 @@ dtb-$(CONFIG_SOC_IMX6UL) += \\|@@ -663,6 +676,8 @@|' -e 's|imx6ull-9x9-evk.dtb \\|efusa7ull.dtb \\\n 	cube2.0ull.dtb \\\n@@ -671,6 +686,8 @@|' $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files/0002-murata-dts-3.3v.patch_tmp > $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files/0002-murata-dts-3.3v.patch 
+rm $LAYER_DIR/$LAYER_NAME/recipes-kernel/linux/files/0002-murata-dts-3.3v.patch_tmp
+
+# setup layer name with sed
+mv $LAYER_DIR/$LAYER_NAME/conf/layer.conf $LAYER_DIR/$LAYER_NAME/conf/layer.conf_tmp
+sed -e "s/murata-wireless/fus-murata-wireless/" $LAYER_DIR/$LAYER_NAME/conf/layer.conf_tmp > $LAYER_DIR/$LAYER_NAME/conf/layer.conf
+rm $LAYER_DIR/$LAYER_NAME/conf/layer.conf_tmp
+
+echo "Modify fus murata wireless layer successful!"

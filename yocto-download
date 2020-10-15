@@ -41,6 +41,9 @@ DOWNLOAD_URL=http://git.yoctoproject.org/cgit/cgit.cgi/meta-mono
 BRANCH=zeus
 git clone $DOWNLOAD_URL sources/meta-mono -b $BRANCH
 
+# Download murata layer and modify it
+./murata-download
+
 # Remove link to fsl-setup-release.sh as it is called directly in
 # fus-setup-release.sh
 rm imx-setup-release.sh

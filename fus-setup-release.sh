@@ -51,6 +51,11 @@ echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-mono \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus \"" >> $BUILD_DIR/conf/bblayers.conf
 
+# Add fus-murata layer if machine is tbs2
+if [ $MACHINE == "tbs2" ]; then
+	echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus-murata-wireless \"" >> $BUILD_DIR/conf/bblayers.conf
+fi
+
 # Determine root file system mode
 if [ "$FS_MODE" == "ro" ]
 then
