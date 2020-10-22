@@ -40,7 +40,7 @@ cat pn-depends.dot | grep -v -e '-native' | grep -v digraph | grep -v -e '-image
 print_usage()
 {
 	# List of possible board names that will be shown later
-	ARCHS="fsimx6 fsimx6sx fsimx6ul fsimx7ulp fsimx8m fsimx8mm"
+	ARCHS="fsimx6 fsimx6sx fsimx6ul fsimx7ulp fsimx8m fsimx8mm fsimx8mx"
 	DISTROS="fus-imx-fb fus-imx-x11 fus-imx-wayland fus-imx-xwayland "
 	echo
 	echo "DISTRO=<distro> MACHINE=<arch> . fus-setup-release.sh [OPTIONS]"
