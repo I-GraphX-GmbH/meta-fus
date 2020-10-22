@@ -31,6 +31,16 @@ EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CPPFLAGS}" \
                  HOSTLDFLAGS="${BUILD_LDFLAGS}" \
                  HOSTSTRIP=true'
 
+
+# FIXME: Allow setting boardconfig by environment variables.
+#        The environment variables have to be added to the BB_ENV_EXTRAWHITE e.g.:
+#        export BB_ENV_EXTRAWHITE=" $BB_ENV_EXTRAWHITE CONFIG_FUS_BOARDTYPE CONFIG_FUS_BOARDREV CONFIG_FUS_FEATURES2"
+do_compile_prepend () {
+	export CONFIG_FUS_BOARDTYPE=${CONFIG_FUS_BOARDTYPE};
+	export CONFIG_FUS_BOARDREV=${CONFIG_FUS_BOARDREV};
+	export CONFIG_FUS_FEATURES2=${CONFIG_FUS_FEATURES2};
+}
+
 do_deploy_append_mx8m () {
     # Deploy the mkimage, u-boot-nodtb.bin and fsl-imx8mq-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
