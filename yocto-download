@@ -20,7 +20,7 @@ fi
 echo "Getting download information (repo init)"
 DOWNLOAD_URL=https://source.codeaurora.org/external/imx/imx-manifest
 BRANCH=imx-linux-zeus
-MANIFEST=imx-5.4.24-2.1.0.xml
+MANIFEST=imx-5.4.47-2.2.0.xml
 ./repo init -u $DOWNLOAD_URL -b $BRANCH -m $MANIFEST
 
 # Download the GIT repositories. This is:
