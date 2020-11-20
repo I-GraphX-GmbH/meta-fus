@@ -36,7 +36,7 @@ PREFERRED_PROVIDER_virtual/kernel_mx8mn = "linux-fus"
 IMAGE_FSTYPES = "ubifs ext4 wic.gz"
 IMAGE_FSTYPES_mx7ulp  = "sdcard"
 
-MKUBIFS_ARGS = "-m 2048 -e 126976 -c 2048"
+MKUBIFS_ARGS ??= "-m 2048 -e 126976 -c 2048"
 
 # Remove image_types_fsl because there is a awk command which search after a
 # point(.) in the devicetrees. But we have 2 points in the devicetree 
