@@ -58,6 +58,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     linux-firmware-wl12xx \
     linux-firmware-wl18xx \
     linux-firmware-sd8787 \
+    linux-firmware-sd8997 \
     linux-firmware-atmel-mxt \
     v4l-utils \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init', '', d)} \
@@ -67,7 +68,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     shutdown-desktop \
     libsdl', '', d)} \
 	fs-startscript \
-	${@bb.utils.contains('MACHINE_FEATURES', 'wlan-sd8997 ', 'linux-firmware-wlan-sd8997', '', d)} \
 	${@bb.utils.contains('MACHINE_FEATURES', 'murata-1mw ', 'hostap-conf hostap-utils hostapd murata-binaries iperf3 libnl-nf libnl-route', '', d)} \
 "
 CORE_IMAGE_EXTRA_INSTALL_remove += " \
