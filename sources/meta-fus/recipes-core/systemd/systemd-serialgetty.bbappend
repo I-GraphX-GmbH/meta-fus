@@ -30,5 +30,3 @@ do_install() {
 		fi
 	fi
 }
-
-
