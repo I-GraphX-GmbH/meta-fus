@@ -33,15 +33,15 @@ PREFERRED_PROVIDER_virtual/kernel_mx8mm = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx8m = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx8mn = "linux-fus"
 
-IMAGE_FSTYPES = "ubifs ext4 wic.gz"
+IMAGE_FSTYPES ??= "ubifs ext4 squashfs wic wic.gz"
 IMAGE_FSTYPES_mx7ulp  = "sdcard"
 
 MKUBIFS_ARGS ??= "-m 2048 -e 126976 -c 2048"
 
 # Remove image_types_fsl because there is a awk command which search after a
-# point(.) in the devicetrees. But we have 2 points in the devicetree 
+# point(.) in the devicetrees. But we have 2 points in the devicetree
 # picocom1.2.dtb so the awk command find the first point, so the new name is
-# picocom1 instead of picocom1.2. And thats why you get an error at compile 
+# picocom1 instead of picocom1.2. And thats why you get an error at compile
 # time. Thats why we copy the image_types_fsl and rename it as image_types_fus
 # and changed the line in the original file from
 # "DTS_BASE_NAME=`basename ${DTS_FILE} | awk -F "." '{print $1}'`" to
