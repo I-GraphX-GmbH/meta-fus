@@ -33,7 +33,6 @@ PREFERRED_PROVIDER_virtual/kernel_mx8mm = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx8m = "linux-fus"
 PREFERRED_PROVIDER_virtual/kernel_mx8mn = "linux-fus"
 
-IMAGE_FSTYPES = "ubifs ext4 wic wic.gz"
 IMAGE_FSTYPES_mx7ulp  = "sdcard"
 
 MKUBIFS_ARGS ??= "-m 2048 -e 126976 -c 2048"
