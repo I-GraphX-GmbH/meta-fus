@@ -40,6 +40,7 @@ fi
 
 
 
+
 # Path to fsl-setup-release.sh script
 FSL_SETUP_RELEASE=sources/meta-imx/tools/imx-setup-release.sh
 
@@ -75,3 +76,23 @@ echo "" >> $BUILD_DIR/conf/local.conf
 echo "# We remove the optee layer from the build for now because it causes trouble with the machine" >> $BUILD_DIR/conf/local.conf
 echo "# name and we do not support optee on our boards so far." >> $BUILD_DIR/conf/local.conf
 echo "BBMASK += \"meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/ \"" >> $BUILD_DIR/conf/local.conf
+
+
+##
+# Run layer dependend init
+##
+
+OLD_PWD=$PWD
+cd ..
+LIST_OF_INIT_SCRIPTS=$(ls -d sources/*)
+cd $OLD_PWD
+
+for INIT_SCRIPT in $LIST_OF_INIT_SCRIPTS; do
+
+	if [[ -e ../${INIT_SCRIPT}/scripts/fus_setup.sh ]]; then
+		echo "Following extra layer init run": "../${INIT_SCRIPT}/scripts/fus_setup.sh"
+		export BUILD_DIR=$BUILD_DIR
+		sh ../${INIT_SCRIPT}/scripts/fus_setup.sh $BUILD_DIR ${INIT_SCRIPT}/scripts
+	fi
+done
+###
