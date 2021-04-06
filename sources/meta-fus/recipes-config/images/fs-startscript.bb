@@ -6,7 +6,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 PR = "r0"
 
-SRC_URI = "file://fsdistro-x11.sh file://fsalias.sh file://systemd-fsgetty-generator "
+SRC_URI = " \
+           file://fsdistro-x11.sh \
+           file://fsalias.sh \
+           file://systemd-fsgetty-generator \
+           file://81-wired-lan.network "
 
 HAS_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
@@ -20,6 +24,7 @@ FILES_${PN} = " ${systemd_unitdir}/system-generators/systemd-fsgetty-generator \
 do_install() {
     install -d ${D}${sysconfdir}/profile.d/
 	install -d ${D}${systemd_unitdir}/system-generators/
+	install -d ${D}${systemd_unitdir}/network/
 
 
     if [ "${HAS_X11}" = "yes" ]; then
@@ -29,4 +34,14 @@ do_install() {
 	install -m 0755 ${WORKDIR}/fsalias.sh  ${D}${sysconfdir}/profile.d/
 	install -m 0755 ${WORKDIR}/systemd-fsgetty-generator ${D}${systemd_unitdir}/system-generators/
 
+	# setup own network configuration for lan* because in normal one is only eth* available but for
+	# PicoCoreMX8MX our network interfaces are called lan*
+	install -m 0644 ${WORKDIR}/81-wired-lan.network ${D}${systemd_unitdir}/network/
+
 }
+
+FILES_${PN} = "\
+    ${sysconfdir}/profile.d/ \
+    ${systemd_unitdir}/system-generators/ \
+    ${systemd_unitdir}/network/ \
+"
