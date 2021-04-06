@@ -8,5 +8,4 @@ SRC_URI = "\
 			file://u-boot-2018.03-fus.tar.bz2 \
 "
 
-
-
+S = "${WORKDIR}/u-boot-2018.03-fus"
