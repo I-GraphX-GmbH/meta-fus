@@ -54,6 +54,8 @@ IMAGE_CLASSES += "image_types_fus"
 UBOOT_SUFFIX = "nb0"
 UBOOT_BINARY = "uboot.${UBOOT_SUFFIX}"
 UBOOT_WIC_BINARY = "u-boot-dtb.img"
+# need hosttools crc32 for U-Boot addfsheader.sh
+HOSTTOOLS_NONFATAL_append_mx8m = " crc32"
 
 DISTRO_NAME = "F&S i.MX Release Distro"
 SANITY_TESTED_DISTROS += "fedora-27"

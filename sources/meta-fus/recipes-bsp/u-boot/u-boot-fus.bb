@@ -27,7 +27,7 @@ COMPATIBLE_MACHINE = "(mx6|vf60|mx8)"
 #                 HOSTLDFLAGS="${BUILD_LDFLAGS}" \
 #                 HOSTSTRIP=true'
 
-do_deploy_mx8m() {
+do_deploy_append_mx8m() {
 	install -m 644 ${B}/${UBOOT_WIC_BINARY} ${DEPLOY_DIR_IMAGE}/
 }
 
