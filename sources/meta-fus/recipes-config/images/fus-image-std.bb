@@ -59,6 +59,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     linux-firmware-wl18xx \
     linux-firmware-sd8787 \
     linux-firmware-sd8997 \
+    linux-firmware-pcie8997 \
     linux-firmware-atmel-mxt \
     v4l-utils \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init', '', d)} \
