@@ -1,6 +1,44 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8mm-Y2021.04 (21.04.2021 based on Yocto 3.0 Zeus)
+----------------------------------------------------------------
+- Update yocto to 3.0 (Zeus)
+- Add atmel mxt linux firmware recipe
+- Merge fsimx8 U-Boot and Kernel build to common recipe *-fus.bb
+- Fix fus-image-qt5
+- Add fsimx8mx machine file
+- Add static board conf via environment variable
+- Remove kernel-module-imx-gpu-viv from linux-fus recipe
+- Remove kernel image from rootfs
+- Improve support for WIFI module 1MW from murata
+- Update to Yoco 3.0.4 (Zeus) Kernel 5.4.47
+- Improve fsimx8mx.confand fus-common.inc
+- Add machine for fsimx8mx-nano
+- Improve fsimx8mm machine file
+- Add fbi as image viewer to package
+- Add new firmware for atmel touch mxt336
+- Increase yocto manifest file to work with kernel version 5.4.70
+- Improve access to firmware marvel sd8997
+- Remove unnecessary files and syntax failures
+- Improve FS FUS_LOGIN_CONSOLE setup
+- Improve fsimx8m* machine files
+- Change: IMAGE_FSTYPES: Cause of building problems, revert changes of ??=
+- Remove IMAGE_FSTYPES from fus-common.inc
+- Fix: "?="  to "="
+- Add: Sub init function
+- Improve linux-fus recipe from meta-fus layer
+- Add support to build new uboot-fus
+- Improve default network startup for F&S images
+- Improve build of u-boot-fw-utils
+- Remove ATF patch from recipe
+- Improve u-boot-fus recipe
+- Add linux-firmware-pcie8997 to target fus-image-std
+- Improve KERNEL_MODULE_PACKAGE_SUFFIX for layer meta-fus
+- Improve meta-fus wic layout fat partition offset
+
+
+
 yocto-2.4-fsimx7ulp-Y2020.03 (31.03.2020 based on Yocto 2.4 Rocko)
 ------------------------------------------------------------------
 Supported architectures: fsimx6, fsimx6x, fsimx6ul fsimx7ulp
@@ -18,11 +56,9 @@ Supported architectures: fsimx6, fsimx6x, fsimx6ul
 
 
 
-
 yocto-2.4-fsimx6x-Y2020.03 (24.03.2020 based on Yocto 2.4 Rocko)
 ------------------------------------------------------------------
 Supported architectures: fsimx6, fsimx6x
-
 
 
 
