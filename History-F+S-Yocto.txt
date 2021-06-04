@@ -1,6 +1,15 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8mp-Y2021.06 (04.06.2021 based on Yocto 3.0 Zeus)
+----------------------------------------------------------------
+- Remove xf86-input-libinput from XServer
+- Update to NXP 5.4.70-2.3.2 release
+- Add fsimx8mp support
+- Improve imx-boot recipe
+- Improve recipe linux-fus.bbapend
+- Improve naming for wic images
+
 yocto-3.0-fsimx8mm-Y2021.04 (21.04.2021 based on Yocto 3.0 Zeus)
 ----------------------------------------------------------------
 - Update yocto to 3.0 (Zeus)
