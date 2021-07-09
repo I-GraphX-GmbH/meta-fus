@@ -3,6 +3,12 @@ Version History for Yocto on F&S Boards and Modules
 
 yocto-3.0-fsimx8mp-Y2021.06 (04.06.2021 based on Yocto 3.0 Zeus)
 ----------------------------------------------------------------
+- Improve machine fsimx6ul.conf to build device tree gar3.dtb
+- Improve machine fsimx6sx.conf to build device tree vand3.dtb
+- Improve machine file fsimx8mn to work with new U-Boot
+
+yocto-3.0-fsimx8mp-Y2021.06 (04.06.2021 based on Yocto 3.0 Zeus)
+----------------------------------------------------------------
 - Remove xf86-input-libinput from XServer
 - Update to NXP 5.4.70-2.3.2 release
 - Add fsimx8mp support
