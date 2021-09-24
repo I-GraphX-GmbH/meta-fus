@@ -1,6 +1,20 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8mn-Y2021.09 (24.09.2021 based on Yocto 3.0 Zeus)
+------------------------------------------------------------------
+Supported architectures: fsimx8mn
+
+- Remove archiving of sysimg
+- Remove unused config fsimx8mx-nano.conf
+- Adjust device tree names in fsimx8mm and fsimx8mn
+- Enable different UBoot offsets in user area of eMMC
+- Enable initramfs for imx-kobs
+- Add touch calibrator for Weston
+- Update .gitignore
+
+
+
 yocto-3.0-fsimx8mp-Y2021.07.1 (19.07.2021 based on Yocto 3.0 Zeus)
 ----------------------------------------------------------------
 
