@@ -1,0 +1,76 @@
+if test $bd_kernel = "nand";
+then
+
+# NANDBOOT
+# Load kernel image and store in partition Kernel
+load ${updatedev} . ${bootfile}-${arch}
+nand erase.part Kernel
+nand write . Kernel ${filesize}
+# Load device tree blob and store in partition FDT
+load ${updatedev} . ${bootfdt}
+nand erase.part FDT
+nand write . FDT ${filesize}
+# Create UBI with volume rootfs on partition TargetFS
+nand erase.part TargetFS
+ubi part TargetFS
+ubi create rootfs
+# Load root filesystem and store in UBI volume rootfs
+load ${updatedev} . rootfs-${arch}.ubifs
+ubi write . rootfs ${filesize}
+# Set default configuration: kernel and fdt from NAND, rootfs from ubifs
+run .kernel_nand
+run .fdt_nand
+run .rootfs_ubifs
+
+else
+
+# MMC BOOT
+# Set Chunk size to 256 MiB
+setenv update_chunk_size 10000000
+setenv update_chunk_pos 0
+
+# Set to mmc User partition
+mmc dev ${mmcdev} 0
+
+size ${updatedev} emmc-${arch}.sysimg
+setenv update_image_size_rest $filesize
+
+while test ${update_image_size_rest} != 0 ; do
+
+load ${updatedev} . emmc-${arch}.sysimg ${update_chunk_size} ${update_chunk_pos}
+
+setenv update_chunk_size $filesize
+
+setexpr update_image_size_rest ${update_image_size_rest} - ${update_chunk_size}
+
+# Round up
+setexpr u_c_size_blk ${update_chunk_size} + 0x1ff
+# Convert to blk size
+setexpr u_c_size_blk ${u_c_size_blk} / 0x200
+setexpr u_c_pos_blk ${update_chunk_pos} / 0x200
+
+mmc write . ${u_c_pos_blk} ${u_c_size_blk}
+
+setexpr update_chunk_pos ${update_chunk_pos} + ${update_chunk_size}
+
+done
+# Set default configuration: kernel, fdt, auxcore and rootfs from MMC
+run .kernel_mmc
+run .fdt_mmc
+run .rootfs_mmc
+
+# Remove unnecessary variables
+setenv update_chunk_size
+setenv update_chunk_pos
+setenv update_image_size_rest
+setenv u_c_size_blk
+setenv u_c_pos_blk
+fi;
+
+# Remove update variable and save environment
+setenv updatedev
+saveenv
+# Done
+echo "Installation complete"
+echo
+echo "Please set/verify ethernet address(es) now and call saveenv"
