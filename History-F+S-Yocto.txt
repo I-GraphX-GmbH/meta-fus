@@ -1,6 +1,18 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8mn-Y2021.10 (30.10.2021 based on Yocto 3.0 Zeus)
+----------------------------------------
+Supported architectures: fsimx8mn
+
+- Include all weston binaries for fus-image-std
+- Add mipi2rgb for fsimx8mn
+- Add building of install.scr in Yocto
+- Add adp-mipi2lvds for fsimx8mn
+- Add fs-startscript for core-image-minimal
+
+
+
 yocto-3.0-fsimx8mn-Y2021.09 (24.09.2021 based on Yocto 3.0 Zeus)
 ------------------------------------------------------------------
 Supported architectures: fsimx8mn
