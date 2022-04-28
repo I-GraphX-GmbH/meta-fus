@@ -36,11 +36,6 @@ MANIFEST=imx-5.4.70-2.3.0.xml
 echo "Downloading all Yocto packages (repo sync)"
 ./repo sync
 
-# Download mono layer
-DOWNLOAD_URL=http://git.yoctoproject.org/cgit/cgit.cgi/meta-mono
-BRANCH=zeus
-git clone $DOWNLOAD_URL sources/meta-mono -b $BRANCH
-
 # Download murata layer and modify it
 ./murata-download
 
