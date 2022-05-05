@@ -388,6 +388,7 @@ do_rename_wic_gz_image() {
 	gzip -d ${IMAGE_NAME}.rootfs.wic.gz
 	cp ${IMAGE_NAME}.rootfs.wic ${IMAGE_NAME}.sysimg
 	ln -sf ${IMAGE_NAME}.sysimg ${IMAGE_BASENAME}-${MACHINE}.sysimg
+	ln -sf ${IMAGE_BASENAME}-${MACHINE}.sysimg emmc-${MACHINE}.sysimg
 	# remove old images
 	rm -f ${IMAGE_NAME}.rootfs.wic
 	rm -f ${IMAGE_BASENAME}-${MACHINE}.wic.gz
