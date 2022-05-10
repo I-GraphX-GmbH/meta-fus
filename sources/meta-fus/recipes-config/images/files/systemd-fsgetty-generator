@@ -1,7 +1,7 @@
 #!/bin/sh
 
 servicePath=/lib/systemd/system
-tempServicePath=/run/systemd
+tempServicePath=/run/systemd/system
 unitPath=/run/systemd/generator/getty.target.wants
 serviceName=fsserial-getty@.service
 
