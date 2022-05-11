@@ -1,6 +1,24 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx7ulp-Y2022.05 (11.05.2022 based on Yocto 3.0 Zeus)
+----------------------------------------
+Supported architectures: fsimx7ulp
+
+- Improve tbs2 machine file
+- Fix passing of ethaddr for Silex WLAN module
+- Add error handling for the install script with eMMC
+- Remove mono from yocto-fus
+- Fix fs-installscript.bb form 32-Bit ARM targets
+- Improve fsimx7ulp machine
+- Use newer weston-imx version
+- Create symlink for emmc-${MACHINE}.sysimage file
+- Fix fsimx7ulp asound.state
+- Fix environmentvariable TERM being set to @BAUDRATE@
+- Add M4 image to the emmc sysimg file of fsimx7ulp
+
+
+
 yocto-3.0-fsimx8mn-Y2021.10 (30.10.2021 based on Yocto 3.0 Zeus)
 ----------------------------------------
 Supported architectures: fsimx8mn
