@@ -32,7 +32,7 @@ kernel_do_install() {
 
 # rename kernel image to be confirmed with naming convention
 # for iMX8M based boards
-kernel_do_deploy_append_mx8m() {
+kernel_do_deploy:append_mx8m() {
 	# Set soft link to the kernel image and remove not needed links.
     # Use conform naming to documentation.
 	cd ${DEPLOYDIR}

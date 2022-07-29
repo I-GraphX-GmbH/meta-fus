@@ -49,7 +49,7 @@ MKUBIFS_ARGS ??= "-m 2048 -e 126976 -c 2048"
 # "DTS_BASE_NAME=`basename ${DTS_FILE} | awk -F ".dtb" '{print $1}'`"
 # The Original file will be find in sources/meta-fsl-arm/classes/
 # image_types_fsl.bbclass
-IMAGE_CLASSES_remove = "image_types_fsl"
+IMAGE_CLASSES:remove = "image_types_fsl"
 IMAGE_CLASSES += "image_types_fus"
 
 # necessary, will be set in fsl-imx-preferred-env.inc
@@ -57,7 +57,7 @@ UBOOT_SUFFIX = "nb0"
 UBOOT_BINARY = "uboot.${UBOOT_SUFFIX}"
 UBOOT_WIC_BINARY = "u-boot-dtb.img"
 # need hosttools crc32 for U-Boot addfsheader.sh
-HOSTTOOLS_NONFATAL_append_mx8m = " crc32"
+HOSTTOOLS_NONFATAL:append:mx8 = " crc32"
 
 DISTRO_NAME = "F&S i.MX Release Distro"
 SANITY_TESTED_DISTROS += "fedora-27"

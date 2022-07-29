@@ -16,6 +16,6 @@ FSCONFIG = "fsvybrid_defconfig"
 
 COMPATIBLE_MACHINE = "(vf60)"
 
-kernel_do_configure_prepend() {
+kernel_do_configure:prepend() {
 	oe_runmake ${FSCONFIG}
 }

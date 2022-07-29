@@ -42,14 +42,14 @@ RRECOMMENDS_${PN} += " \
 
 ### QT Examples ###
 
-#RDEPENDS_${PN}_append = " \
+#RDEPENDS_${PN}:append = " \
 #    qtdeclarative-examples \
 #    quitindicators \
 #    qt5-demo-extrafiles \
 #"
 
 # Install the following apps on SoC with GPU
-#RDEPENDS_${PN}_append_imxgpu = " \
+#RDEPENDS_${PN}:append:imxgpu = " \
 #    qtsmarthome \
 #    qt5ledscreen \
 #    quitbattery \
@@ -59,7 +59,7 @@ RRECOMMENDS_${PN} += " \
 #    cinematicexperience \
 #"
 
-#RDEPENDS_${PN}_append_imxgpu3d = " \
+#RDEPENDS_${PN}:append:imxgpu3d = " \
 #    qt3d-examples \
 #"
 

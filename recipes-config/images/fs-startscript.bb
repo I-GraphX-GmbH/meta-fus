@@ -16,11 +16,6 @@ HAS_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
 inherit systemd
 
-FILES_${PN} = " ${systemd_unitdir}/system-generators/systemd-fsgetty-generator \
-				${sysconfdir}/profile.d/fsalias.sh \
-				${sysconfdir}/profile.d/fsdistro-x11.sh \
-"
-
 do_install() {
     install -d ${D}${sysconfdir}/profile.d/
 	install -d ${D}${systemd_unitdir}/system-generators/
@@ -40,7 +35,10 @@ do_install() {
 
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
+	${systemd_unitdir}/system-generators/systemd-fsgetty-generator \
+	${sysconfdir}/profile.d/fsalias.sh \
+	${sysconfdir}/profile.d/fsdistro-x11.sh \
     ${sysconfdir}/profile.d/ \
     ${systemd_unitdir}/system-generators/ \
     ${systemd_unitdir}/network/ \

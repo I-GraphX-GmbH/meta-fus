@@ -3,7 +3,7 @@ LICENSE = "MIT"
 
 require recipes-config/images/fus-image-std.bb
 
-inherit distro_features_check
+inherit features_check
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
@@ -38,7 +38,7 @@ QT5_IMAGE_INSTALL_imxgpu3d = " \
 "
 
 # Add packagegroup-qt5-webengine to QT5_IMAGE_INSTALL_mx6 and comment out the line below to install qtwebengine to the rootfs.
-QT5_IMAGE_INSTALL_remove = " packagegroup-qt5-webengine"
+QT5_IMAGE_INSTALL:remove = " packagegroup-qt5-webengine"
 
 IMAGE_INSTALL += " \
 ${QT5_IMAGE_INSTALL} \

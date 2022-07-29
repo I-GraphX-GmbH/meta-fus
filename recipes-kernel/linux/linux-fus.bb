@@ -36,7 +36,7 @@ FSCONFIG_mx8mp = "fsimx8mp_defconfig"
 
 # Prevent the galcore-module from beeing build, because it is already
 # included in the F&S-Linux-Kernel as a build-in
-RPROVIDES_kernel-image += "kernel-module-imx-gpu-viv"
+RPROVIDES:kernel-image += "kernel-module-imx-gpu-viv"
 
 do_extraunpack () {
 	mv ${WORKDIR}/linux-fus/* ${S}/
@@ -45,4 +45,6 @@ do_extraunpack () {
 
 kernel_do_configure_prepend() {
 	install -m 0644 ${S}/arch/${ARCH}/configs/${FSCONFIG} ${WORKDIR}/defconfig
+kernel_do_configure:prepend() {
+	install -m 0644 ${S}/arch/${ARCH}/configs/${KBUILD_DEFCONFIG} ${WORKDIR}/defconfig
 }

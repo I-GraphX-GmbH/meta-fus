@@ -2,6 +2,6 @@
 
 
 # Update asound.conf for all SoC
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 

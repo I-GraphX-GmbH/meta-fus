@@ -3,10 +3,9 @@
 
 DESCRIPTION = "bootloader for F&S boards and modules"
 require recipes-bsp/u-boot/u-boot.inc
-inherit pythonnative
 
 PROVIDES += "u-boot"
-DEPENDS_append = " python dtc-native bison-native"
+DEPENDS:append = " python dtc-native bison-native"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
@@ -24,13 +23,13 @@ BOOT_TOOLS = "imx-boot-tools"
 # FIXME: Allow setting boardconfig by environment variables.
 #        The environment variables have to be added to the BB_ENV_EXTRAWHITE e.g.:
 #        export BB_ENV_EXTRAWHITE=" $BB_ENV_EXTRAWHITE CONFIG_FUS_BOARDTYPE CONFIG_FUS_BOARDREV CONFIG_FUS_FEATURES2"
-do_compile_prepend () {
+do_compile:prepend () {
 	export CONFIG_FUS_BOARDTYPE=${CONFIG_FUS_BOARDTYPE};
 	export CONFIG_FUS_BOARDREV=${CONFIG_FUS_BOARDREV};
 	export CONFIG_FUS_FEATURES2=${CONFIG_FUS_FEATURES2};
 }
 
-do_deploy_append_mx8m () {
+do_deploy:append:mx8m () {
     # Deploy the mkimage, u-boot-nodtb.bin and picocoremx8mp.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then

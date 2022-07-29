@@ -75,7 +75,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
 	fs-startscript \
 	${@bb.utils.contains('MACHINE_FEATURES', 'murata-1mw ', 'hostap-conf hostap-utils hostapd murata-binaries iperf3 libnl-nf libnl-route', '', d)} \
 "
-CORE_IMAGE_EXTRA_INSTALL_remove += " \
+CORE_IMAGE_EXTRA_INSTALL:remove = " \
 ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im matchbox-panel-2 \
     matchbox-desktop matchbox-terminal \
     shutdown-desktop \

@@ -1,8 +1,8 @@
 SUMMARY = "F&S mini-x-session"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI += "file://mini-x-session"
 
-do_install_append() {
+do_install:append() {
 	install -m 0755 ${WORKDIR}/mini-x-session ${D}/${bindir}
 }

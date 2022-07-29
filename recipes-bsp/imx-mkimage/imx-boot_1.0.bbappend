@@ -1,6 +1,6 @@
 # Copyright 2020 F&S Elektronik Systeme GmbH
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI[md5sum] = "ce864e0f149993d41e9480bf4c2e8510"
 SRC_URI += "file://0001-Add-option-arg-for-nand-device.patch"

@@ -6,7 +6,7 @@ require recipes-bsp/u-boot/u-boot.inc
 inherit pythonnative
 
 PROVIDES += "u-boot"
-DEPENDS_append = " python dtc-native"
+DEPENDS:append = " python3 dtc-native"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
@@ -27,7 +27,7 @@ COMPATIBLE_MACHINE = "(mx6|vf60|mx7ulp|mx8)"
 #                 HOSTLDFLAGS="${BUILD_LDFLAGS}" \
 #                 HOSTSTRIP=true'
 
-do_deploy_append_mx8m() {
+do_deploy:append:mx8m() {
 	install -m 644 ${B}/${UBOOT_WIC_BINARY} ${DEPLOY_DIR_IMAGE}/
 }
 

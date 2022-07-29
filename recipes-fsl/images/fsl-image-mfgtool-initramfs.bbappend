@@ -2,4 +2,4 @@
 # for it expects UBOOT_CONFIG
 # instead of UBOOT_MACHINE
 
-DEPENDS_remove = "u-boot-mfgtool"
+DEPENDS:remove = "u-boot-mfgtool"
