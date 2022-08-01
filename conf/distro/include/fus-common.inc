@@ -18,3 +18,4 @@ IMAGE_CLASSES += "image_types_fus"
 # need hosttools crc32 for U-Boot addfsheader.sh
 HOSTTOOLS_NONFATAL:append:mx8 = " crc32"
 
+CORE_IMAGE_EXTRA_INSTALL:append = " fs-startscript "

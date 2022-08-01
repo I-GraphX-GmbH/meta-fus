@@ -1,25 +1,22 @@
-DESCRIPTION = "F&S standard image based on X11 and matchbox"
+DESCRIPTION = "F&S standard image"
 LICENSE = "MIT"
 
 inherit core-image
 
+### WARNING: This image is NOT suitable for production use and is intended
+###          to provide a way for users to reproduce the image used during
+###          the validation process of i.MX BSP releases.
+
 ## Select Image Features
 IMAGE_FEATURES += " \
+    debug-tweaks \
     splash \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11-base', \
+    hwcodecs \
+    package-management \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11-base x11-sato', \
                                                        '', d), d)} \
 "
-
-SOC_TOOLS_GPU = ""
-
-SOC_TOOLS_GPU_IMX6QDLSX = " \
-    imx-gpu-viv-g2d \
-    imx-gpu-viv-tools \
-"
-SOC_TOOLS_GPU_mx6q  = "${SOC_TOOLS_GPU_IMX6QDLSX}"
-SOC_TOOLS_GPU_mx6dl = "${SOC_TOOLS_GPU_IMX6QDLSX}"
-SOC_TOOLS_GPU_mx6sx = "${SOC_TOOLS_GPU_IMX6QDLSX}"
 
 RDEPENDS_${PN} += " \
 	fs-installscript \
@@ -43,6 +40,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     lmbench \
     fbset \
     fbida \
+    firmwared \
     strace \
     ltrace \
     gdb \
@@ -52,13 +50,12 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     libusb1 \
     libxml2 \
     bluez5 \
-    canutils \
+    can-utils \
     iw \
     openssh \
     wpa-supplicant \
     hostapd \
     liberation-fonts \
-    firmware-imx \
     linux-firmware-wl12xx \
     linux-firmware-wl18xx \
     linux-firmware-sd8787 \
@@ -68,16 +65,4 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     v4l-utils \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init weston-examples', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im matchbox-panel-2 \
-    matchbox-desktop matchbox-terminal \
-    shutdown-desktop \
-    libsdl', '', d)} \
-	fs-startscript \
-	${@bb.utils.contains('MACHINE_FEATURES', 'murata-1mw ', 'hostap-conf hostap-utils hostapd murata-binaries iperf3 libnl-nf libnl-route', '', d)} \
-"
-CORE_IMAGE_EXTRA_INSTALL:remove = " \
-${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im matchbox-panel-2 \
-    matchbox-desktop matchbox-terminal \
-    shutdown-desktop \
-    libsdl', '', d)} \
 "
