@@ -1,5 +1,0 @@
-
-DEPENDS += "\
-		mesa \
-"
-
