@@ -21,18 +21,12 @@ do_install:append () {
     ln -sf sdsd8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl/sd8997_uapsta.bin
 }
 
-PACKAGES =+ " ${PN}-atmel-mxt ${PN}-sd8997"
+PACKAGES =+ " ${PN}-atmel-mxt "
 
-FILES_${PN}-atmel-mxt = " \
 FILES:${PN}-atmel-mxt = " \
        ${nonarch_base_libdir}/firmware/atmel/mxt224.cfg \
        ${nonarch_base_libdir}/firmware/atmel/mxt224e_v2.cfg \
        ${nonarch_base_libdir}/firmware/atmel/mxt1066.cfg \
        ${nonarch_base_libdir}/firmware/atmel/mxt336u-gloves.cfg \
        ${nonarch_base_libdir}/firmware/atmel/mxt336u-extra-glass.cfg \
-"
-
-FILES_${PN}-sd8997 = " \
-       ${nonarch_base_libdir}/firmware/mrvl/sdsd8997_combo_v4.bin \
-       ${nonarch_base_libdir}/firmware/mrvl/sd8997_uapsta.bin \
 "
