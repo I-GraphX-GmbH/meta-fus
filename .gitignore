@@ -1,10 +1,2 @@
-*.rej
-*.orig
-*.a
-*.o
-*~
-*.depend
-.repo
-*.bz2
-*.bak
-
+linux-fus.bbappend
+u-boot-fus.bbappend
