@@ -38,9 +38,6 @@ if [ -z "$BUILD_DIR" ]; then
    	BUILD_DIR=build-$MACHINE-$DISTRO
 fi
 
-
-
-
 # Path to fsl-setup-release.sh script
 FSL_SETUP_RELEASE=sources/meta-imx/tools/imx-setup-release.sh
 
@@ -50,11 +47,6 @@ DISTRO=$DISTRO MACHINE=$MACHINE . $FSL_SETUP_RELEASE -b $BUILD_DIR
 # Add FuS-Layer
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus \"" >> $BUILD_DIR/conf/bblayers.conf
-
-# Add fus-murata layer if machine is tbs2
-if [ $MACHINE == "tbs2" ]; then
-	echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fus-murata-wireless \"" >> $BUILD_DIR/conf/bblayers.conf
-fi
 
 # Determine root file system mode
 if [ "$FS_MODE" == "ro" ]
@@ -68,15 +60,6 @@ else
 	echo
 	echo "Building read/write root file system"
 fi
-
-# We remove the optee layer from the build for now because it causes trouble with the machine
-# name and we do not support optee on our boards so far.
-echo "" >> $BUILD_DIR/conf/local.conf
-echo "# We remove the optee layer from the build for now because it causes trouble with the machine" >> $BUILD_DIR/conf/local.conf
-echo "# name and we do not support optee on our boards so far." >> $BUILD_DIR/conf/local.conf
-echo "BBMASK += \"meta-fsl-bsp-release/imx/meta-bsp/recipes-security/optee-imx/ \"" >> $BUILD_DIR/conf/local.conf
-echo "CORE_IMAGE_EXTRA_INSTALL += \"fs-startscript \"" >> $BUILD_DIR/conf/local.conf
-
 
 ##
 # Run layer dependend init
