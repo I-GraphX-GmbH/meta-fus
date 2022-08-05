@@ -33,6 +33,7 @@ FSCONFIG_mx8mm = "fsimx8mm_defconfig"
 FSCONFIG_mx8m = "fsimx8m_defconfig"
 FSCONFIG_mx8mn = "fsimx8mn_defconfig"
 FSCONFIG_mx8mp = "fsimx8mp_defconfig"
+FSCONFIG_mx8x = "fsimx8x_defconfig"
 
 # Prevent the galcore-module from beeing build, because it is already
 # included in the F&S-Linux-Kernel as a build-in
