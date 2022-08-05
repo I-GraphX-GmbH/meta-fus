@@ -9,21 +9,21 @@ then
 
 # NANDBOOT
 # Load kernel image and store in partition Kernel
-load ${updatedev} . ${bootfile}-${arch}
+load ${updatedev} ${loadaddr} ${bootfile}-${arch}
 nand erase.part Kernel
-nand write . Kernel ${filesize}
+nand write ${loadaddr} Kernel ${filesize}
 # Load device tree blob and store in partition FDT
-load ${updatedev} . ${bootfdt}
+load ${updatedev} ${loadaddr} ${bootfdt}
 nand erase.part FDT
-nand write . FDT ${filesize}
+nand write ${loadaddr} FDT ${filesize}
 # Load root filesystem
-load ${updatedev} . rootfs-${arch}.ubifs
+load ${updatedev} ${loadaddr} rootfs-${arch}.ubifs
 # Create UBI with volume rootfs on partition TargetFS
 nand erase.part TargetFS
 ubi part TargetFS
 ubi create rootfs
 # Store root filesystem in UBI volume rootfs
-ubi write . rootfs ${filesize}
+ubi write ${loadaddr} rootfs ${filesize}
 # Set default configuration: kernel and fdt from NAND, rootfs from ubifs
 run .kernel_nand
 run .fdt_nand
@@ -48,7 +48,7 @@ if itest ${update_image_size_rest} -lt ${update_chunk_size}; then
 setenv update_chunk_size $update_image_size_rest
 fi
 
-load ${updatedev} . emmc-${arch}.sysimg ${update_chunk_size} ${update_chunk_pos}
+load ${updatedev} ${loadaddr} emmc-${arch}.sysimg ${update_chunk_size} ${update_chunk_pos}
 run is_error && exit 1
 
 setexpr update_image_size_rest ${update_image_size_rest} - ${update_chunk_size}
@@ -59,7 +59,7 @@ setexpr u_c_size_blk ${update_chunk_size} + 0x1ff
 setexpr u_c_size_blk ${u_c_size_blk} / 0x200
 setexpr u_c_pos_blk ${update_chunk_pos} / 0x200
 
-mmc write . ${u_c_pos_blk} ${u_c_size_blk}
+mmc write ${loadaddr} ${u_c_pos_blk} ${u_c_size_blk}
 
 setexpr update_chunk_pos ${update_chunk_pos} + ${update_chunk_size}
 
