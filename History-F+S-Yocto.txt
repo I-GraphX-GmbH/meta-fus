@@ -1,6 +1,16 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8x-Y2022.08 (09.08.2022 based on Yocto 3.0 Zeus)
+---------------------------------------
+Supported architectures: fsimx8x
+
+- Add fsimx8x to meta-fus
+- Use terminal vt100 instead of xterm
+- Revert to use of loadaddr in install script
+
+
+
 yocto-3.0-fsimx7ulp-Y2022.05 (11.05.2022 based on Yocto 3.0 Zeus)
 ----------------------------------------
 Supported architectures: fsimx7ulp
