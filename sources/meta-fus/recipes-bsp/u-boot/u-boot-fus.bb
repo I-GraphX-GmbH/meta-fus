@@ -17,7 +17,7 @@ SRC_URI += '${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "", "file
 S = "${WORKDIR}/u-boot-2018.03-fus"
 
 UBOOT_MAKE_TARGET = "all"
-COMPATIBLE_MACHINE = "(mx6|vf60|mx8)"
+COMPATIBLE_MACHINE = "(mx6|vf60|mx7ulp|mx8)"
 
 # Necessary ???
 # FIXME: Allow linking of 'tools' binaries with native libraries

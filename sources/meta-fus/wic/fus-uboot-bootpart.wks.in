@@ -13,7 +13,7 @@
 # 0 2MiB    8MiB          72MiB + rootfs + IMAGE_EXTRA_SPACE (default 10MiB)
 #
 # We have to use UBOOT_WIC_BINARY instead of UBOOT_BINARY. In UBOOT_WIC_BINARY the FS header is removed.
-part u-boot --source rawcopy --sourceparams="file=${UBOOT_WIC_BINARY}" --ondisk mmcblk --no-table --align 2048
+part u-boot --source rawcopy --sourceparams="file=${UBOOT_WIC_BINARY}" --ondisk mmcblk --no-table --align ${UBOOT_OFFSET}
 part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 8192 --size 64
 part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 8192
 

@@ -109,7 +109,7 @@ state.imxsgtl5000 {
 	}
 }
 
-state.rpmsgaudio {
+state.sgtl5000audio {
         control.1 {
                 iface MIXER
                 name 'PCM Playback Volume'
