@@ -1,6 +1,14 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fsimx8mm-Y2021.04.2 (16.09.2022)
+------------------------------------------
+Supported boards: PicoCoreMX8MM PicoCoreMX8MMr2 PicoCoreMX8MX
+
+- Fix fsimx8mm devicetree conf
+
+
+
 yocto-3.0-fsimx8mm-Y2021.04.1 (27.08.2022)
 ------------------------------------------
 Supported boards: PicoCoreMX8MM PicoCoreMX8MMr2 PicoCoreMX8MX
