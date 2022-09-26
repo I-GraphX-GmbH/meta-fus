@@ -13,6 +13,24 @@ QBlissA9 armStoneA9 armStoneA9r2 armStoneA9r3
 
 
 
+yocto-3.0-fsimx8mm-Y2021.04.2 (16.09.2022)
+------------------------------------------
+Supported boards: PicoCoreMX8MM PicoCoreMX8MMr2 PicoCoreMX8MX
+
+- Fix fsimx8mm devicetree conf
+
+
+
+yocto-3.0-fsimx8mm-Y2021.04.1 (27.08.2022)
+------------------------------------------
+Supported boards: PicoCoreMX8MM PicoCoreMX8MMr2 PicoCoreMX8MX
+
+- Add picocoremx8mmr2 DTS and remove unused picocoremx8mm DTS
+- Remove mono from yocto-fus
+- Add alsa tinycompress mirror
+
+
+
 yocto-3.0-fsimx8x-Y2022.08 (09.08.2022 based on Yocto 3.0 Zeus)
 ---------------------------------------
 Supported architectures: fsimx8x
