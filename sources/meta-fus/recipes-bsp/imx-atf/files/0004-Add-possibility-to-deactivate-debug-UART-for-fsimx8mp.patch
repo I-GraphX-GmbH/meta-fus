@@ -1,0 +1,70 @@
+From 1842d08f9649b6753ebbe36ce1f8f208ba5d0a5a Mon Sep 17 00:00:00 2001
+From: Anatol Derksen <derksen@fs-net.de>
+Date: Tue, 9 Aug 2022 08:59:11 +0200
+Subject: [PATCH] Add possibility to deactivate debug UART for fsimx8mp
+
+Add possibility to deactivate debug UART for fsimx8mp
+
+By default NXP uses a fix Debug UART port. We do not have a fix UART
+port, it can differs between different boards. Therefore we add a debug
+define which can be activated to see ATF debug output. By default the
+debug output is disabled.
+---
+ plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c    | 8 +++++---
+ plat/imx/imx8m/imx8mp/include/platform_def.h | 2 ++
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
+index f5ce699..b0b08fa 100644
+--- a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
++++ b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
+@@ -109,7 +109,7 @@ static uint32_t get_spsr_for_bl33_entry(void)
+ 	return spsr;
+ }
+ 
+-void bl31_tzc380_setup(void)
++static void bl31_tzc380_setup(void)
+ {
+ 	unsigned int val;
+ 
+@@ -132,7 +132,9 @@ void bl31_tzc380_setup(void)
+ void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
+ 		u_register_t arg2, u_register_t arg3)
+ {
++#if DEBUG_CONSOLE
+ 	static console_uart_t console;
++#endif
+ 	int i;
+ 
+ 	/* Enable CSU NS access permission */
+@@ -150,12 +152,12 @@ void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
+ 	mmio_write_32(IMX_IOMUX_GPR_BASE + 0x2c, 0xE1);
+ 
+ 	imx8m_caam_init();
+-
++#if DEBUG_CONSOLE
+ 	console_imx_uart_register(IMX_BOOT_UART_BASE, IMX_BOOT_UART_CLK_IN_HZ,
+ 		IMX_CONSOLE_BAUDRATE, &console);
+ 	/* This console is only used for boot stage */
+ 	console_set_scope(&console.console, CONSOLE_FLAG_BOOT);
+-
++#endif
+ 	/*
+ 	 * tell BL3-1 where the non-secure software image is located
+ 	 * and the entry state information.
+diff --git a/plat/imx/imx8m/imx8mp/include/platform_def.h b/plat/imx/imx8m/imx8mp/include/platform_def.h
+index d32789c..f8aed3d 100644
+--- a/plat/imx/imx8m/imx8mp/include/platform_def.h
++++ b/plat/imx/imx8m/imx8mp/include/platform_def.h
+@@ -51,6 +51,8 @@
+ 
+ #define HAB_RVT_BASE			U(0x00000900) /* HAB_RVT for i.MX8MM */
+ 
++#define DEBUG_CONSOLE			0
++
+ #define IMX_BOOT_UART_BASE		U(0x30890000)
+ #define IMX_BOOT_UART_CLK_IN_HZ		24000000 /* Select 24MHz oscillator */
+ 
+-- 
+2.21.3
+

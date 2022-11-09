@@ -1,0 +1,57 @@
+From 29dcb44c2e34c2deee901001ebb79a869eb19d98 Mon Sep 17 00:00:00 2001
+From: Kay Mueller <mueller@fs-net.de>
+Date: Thu, 2 Sep 2021 12:22:33 +0000
+Subject: [PATCH 2/3] Add DEBUG_CONSOLE for imx8mn
+
+Similar to the changes in imx8mm, for imx8mn the debug messages also
+need to be deactivated.
+---
+ plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c    | 6 ++++--
+ plat/imx/imx8m/imx8mn/include/platform_def.h | 2 ++
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c b/plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c
+index 841ec5a..08e411f 100644
+--- a/plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c
++++ b/plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c
+@@ -131,7 +131,9 @@ static void bl31_tzc380_setup(void)
+ void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
+ 		u_register_t arg2, u_register_t arg3)
+ {
++#if DEBUG_CONSOLE
+ 	static console_uart_t console;
++#endif
+ 	int i;
+ 
+ 	/* Enable CSU NS access permission */
+@@ -149,12 +151,12 @@ void bl31_early_platform_setup2(u_register_t arg0, u_register_t arg1,
+ 	mmio_write_32(IMX_IOMUX_GPR_BASE + 0x2c, 0xc1);
+ 
+ 	imx8m_caam_init();
+-
++#if DEBUG_CONSOLE
+ 	console_imx_uart_register(IMX_BOOT_UART_BASE, IMX_BOOT_UART_CLK_IN_HZ,
+ 		IMX_CONSOLE_BAUDRATE, &console);
+ 	/* This console is only used for boot stage */
+ 	console_set_scope(&console.console, CONSOLE_FLAG_BOOT);
+-
++#endif
+ 	/*
+ 	 * tell BL3-1 where the non-secure software image is located
+ 	 * and the entry state information.
+diff --git a/plat/imx/imx8m/imx8mn/include/platform_def.h b/plat/imx/imx8m/imx8mn/include/platform_def.h
+index 967afbb..8fcde7b 100644
+--- a/plat/imx/imx8m/imx8mn/include/platform_def.h
++++ b/plat/imx/imx8m/imx8mn/include/platform_def.h
+@@ -51,6 +51,8 @@
+ 
+ #define HAB_RVT_BASE			U(0x00000900) /* HAB_RVT for i.MX8MM */
+ 
++#define DEBUG_CONSOLE			0
++
+ #define IMX_BOOT_UART_BASE		U(0x30890000)
+ #define IMX_BOOT_UART_CLK_IN_HZ		24000000 /* Select 24MHz oscillator */
+ 
+-- 
+2.21.3
+
