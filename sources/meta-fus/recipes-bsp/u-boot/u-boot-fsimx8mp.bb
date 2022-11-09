@@ -16,40 +16,17 @@ S = "${WORKDIR}/u-boot-2020.04-fus"
 
 UBOOT_MAKE_TARGET = "all"
 COMPATIBLE_MACHINE = "(mx8)"
-UBOOT_NAME_mx8 = "u-boot-${MACHINE}-${UBOOT_CONFIG}.bin"
 
-BOOT_TOOLS = "imx-boot-tools"
+# Necessary ???
+# FIXME: Allow linking of 'tools' binaries with native libraries
+#        used for generating the boot logo and other tools used
+#        during the build process.
+#EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CPPFLAGS}" \
+#                 HOSTLDFLAGS="${BUILD_LDFLAGS}" \
+#                 HOSTSTRIP=true'
 
-
-# FIXME: Allow setting boardconfig by environment variables.
-#        The environment variables have to be added to the BB_ENV_EXTRAWHITE e.g.:
-#        export BB_ENV_EXTRAWHITE=" $BB_ENV_EXTRAWHITE CONFIG_FUS_BOARDTYPE CONFIG_FUS_BOARDREV CONFIG_FUS_FEATURES2"
-do_compile_prepend () {
-	export CONFIG_FUS_BOARDTYPE=${CONFIG_FUS_BOARDTYPE};
-	export CONFIG_FUS_BOARDREV=${CONFIG_FUS_BOARDREV};
-	export CONFIG_FUS_FEATURES2=${CONFIG_FUS_FEATURES2};
-}
-
-do_deploy_append_mx8m () {
-    # Deploy the mkimage, u-boot-nodtb.bin and picocoremx8mp.dtb for mkimage to generate boot binary
-    if [ -n "${UBOOT_CONFIG}" ]
-    then
-        for config in ${UBOOT_MACHINE}; do
-            i=$(expr $i + 1);
-            for type in ${UBOOT_CONFIG}; do
-                j=$(expr $j + 1);
-                if [ $j -eq $i ]
-                then
-                    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-                    install -m 0777 ${B}/${config}/arch/arm/dts/${UBOOT_DTB_NAME}  ${DEPLOYDIR}/${BOOT_TOOLS}
-                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG}
-                fi
-            done
-            unset  j
-        done
-        unset  i
-    fi
-
+do_deploy_append_mx8m() {
+	install -m 644 ${B}/${UBOOT_WIC_BINARY} ${DEPLOY_DIR_IMAGE}/
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
