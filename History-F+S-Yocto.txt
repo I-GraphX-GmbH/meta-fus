@@ -1,6 +1,13 @@
 Version History for Yocto on F&S Boards and Modules
 ===================================================
 
+yocto-3.0-fus-Y2022.11 (09.11.2022)
+-----------------------------------
+Supported boards: armStoneMX8MP PicoCoreMX8MP PicoCoreMX8MPr2
+
+- Add patches for fsimx8m(m,n,p)
+- Add support for fsimx8mp
+
 yocto-3.0-fus-Y2022.09 (21.09.2022)
 -----------------------------------
 Supported boards: efusA9 efusA9r2 armStoneA9 armStoneA9r2 PicoModA9 NetDCUA9
