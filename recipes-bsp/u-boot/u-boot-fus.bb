@@ -3,18 +3,24 @@
 
 DESCRIPTION = "bootloader for F&S boards and modules"
 require recipes-bsp/u-boot/u-boot.inc
-inherit pythonnative
 
 PROVIDES += "u-boot"
-DEPENDS:append = " python3 dtc-native"
+DEPENDS:append = " python3 dtc-native bison-native"
+RDEPENDS:${PN}:append = " fs-installscript"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRC_URI = "file://u-boot-2018.03-fus.tar.bz2"
+# SRC_URI and SRCREV are set in the bbappend file
+
+S = "${WORKDIR}/git"
+PV = "+git${SRCPV}"
+
 # Set the u-boot environment variable "mode" to rw if it is not a read-only-rootfs
 SRC_URI += '${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "", "file://0001-Set-file-system-RW.patch",d)}'
-S = "${WORKDIR}/u-boot-2018.03-fus"
+
+S = "${WORKDIR}/git"
+B = "${WORKDIR}/build"
 
 UBOOT_MAKE_TARGET = "all"
 COMPATIBLE_MACHINE = "(mx6|vf60|mx7ulp|mx8)"
