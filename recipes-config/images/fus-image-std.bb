@@ -20,7 +20,6 @@ IMAGE_FEATURES += " \
 
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0 \
-    packagegroup-fsl-gstreamer1.0-full \
     alsa-utils \
     alsa-tools \
     dosfstools \
@@ -34,7 +33,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     mtd-utils \
     mtd-utils-ubifs \
     lmbench \
-    fbset \
+    libgpiod \
     fbida \
     firmwared \
     strace \

@@ -19,3 +19,6 @@ IMAGE_CLASSES += "image_types_fus"
 HOSTTOOLS_NONFATAL:append:mx8 = " crc32"
 
 CORE_IMAGE_EXTRA_INSTALL:append = " fs-startscript "
+
+# Remove Kernel Image from rootfs
+RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
