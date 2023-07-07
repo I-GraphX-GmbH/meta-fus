@@ -22,3 +22,9 @@ CORE_IMAGE_EXTRA_INSTALL:append = " fs-startscript "
 
 # Remove Kernel Image from rootfs
 RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
+
+# This is necessary because there will be some debian packages created and
+# these packages must be lower case. Basically we set CONFIG_LOCALVERSION to
+# "-F+S". This appends the string "-F+S". Due to the string is upper case we
+# need to set variable to convert it to lower case.
+KERNEL_MODULE_PACKAGE_SUFFIX = "${@legitimize_package_name(d.getVar('KERNEL_VERSION'))}"

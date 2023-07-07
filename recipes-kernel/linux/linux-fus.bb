@@ -21,12 +21,6 @@ PV = "+git${SRCPV}"
 # machine, with different entry points
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
-# This is necessary because there will be some debian packages created and
-# these packages must be lower case. Basically we set CONFIG_LOCALVERSION to
-# "-F+S". This appends the string "-F+S". Due to the string is upper case we
-# need to set variable to convert it to lower case.
-KERNEL_MODULE_PACKAGE_SUFFIX = "${@legitimize_package_name(d.getVar('KERNEL_VERSION'))}"
-
 KBUILD_DEFCONFIG:mx6-nxp-bsp = "fsimx6_defconfig"
 KBUILD_DEFCONFIG:mx6sx-nxp-bsp = "fsimx6sx_defconfig"
 KBUILD_DEFCONFIG:mx6ul-nxp-bsp = "fsimx6ul_defconfig"
