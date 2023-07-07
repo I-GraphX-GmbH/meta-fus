@@ -57,6 +57,8 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     linux-firmware-sd8997 \
     linux-firmware-pcie8997 \
     linux-firmware-atmel-mxt \
+    nxp-wlan-sdk \
+    kernel-module-nxp89xx \
     v4l-utils \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init weston-examples', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \

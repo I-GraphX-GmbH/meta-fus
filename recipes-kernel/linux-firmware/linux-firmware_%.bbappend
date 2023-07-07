@@ -7,7 +7,8 @@ SRC_URI += " file://mxt224.cfg \
 		   file://mxt224e_v2.cfg \
 		   file://mxt1066.cfg \
 		   file://mxt336u-gloves.cfg \
-		   file://mxt336u-extra-glass.cfg"
+		   file://mxt336u-extra-glass.cfg \
+		   file://wifi_mod_para.conf	"
 
 do_install:append () {
     install -d ${D}${nonarch_base_libdir}/firmware/atmel
@@ -19,6 +20,10 @@ do_install:append () {
     install -m 0644 ${WORKDIR}/mxt336u-extra-glass.cfg ${D}${nonarch_base_libdir}/firmware/atmel
     # Create softlink for sdsd8997_combo_v4
     ln -sf sdsd8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl/sd8997_uapsta.bin
+
+    # Install NXP Connectivity
+    install -d ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/wifi_mod_para.conf    ${D}${nonarch_base_libdir}/firmware/nxp
 }
 
 PACKAGES =+ " ${PN}-atmel-mxt "
