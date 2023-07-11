@@ -27,7 +27,7 @@ fi
 # Set baudrate
 cp $servicePath/$serviceName $tempServicePath/
 sed -i -e s/\@BAUDRATE\@/$default_baudrate/g $tempServicePath/$serviceName
-sed -i -e s/xterm/vt100/g $tempServicePath/$serviceName
+sed -i -e s/@TERM@/vt100/g $tempServicePath/$serviceName
 # Set login tty
 ln -s  $tempServicePath/$serviceName   $unitPath/fsserial-getty@$default_tty.service
 
