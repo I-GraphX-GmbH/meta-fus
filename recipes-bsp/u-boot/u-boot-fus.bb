@@ -9,12 +9,17 @@ DEPENDS:append = " python3 dtc-native bison-native"
 RDEPENDS:${PN}:append = " fs-installscript"
 
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
+LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
 # SRC_URI and SRCREV are set in the bbappend file
 
 S = "${WORKDIR}/git"
 PV = "+git${SRCPV}"
+
+SCMVERSION ??= "y"
+LOCALVERSION ??= "-F+S"
+
+UBOOT_LOCALVERSION = "${LOCALVERSION}"
 
 # Set the u-boot environment variable "mode" to rw if it is not a read-only-rootfs
 SRC_URI += '${@bb.utils.contains("IMAGE_FEATURES", "read-only-rootfs", "", "file://0001-Set-file-system-RW.patch",d)}'
@@ -32,6 +37,23 @@ COMPATIBLE_MACHINE = "(mx6|vf60|mx7ulp|mx8)"
 #EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CPPFLAGS}" \
 #                 HOSTLDFLAGS="${BUILD_LDFLAGS}" \
 #                 HOSTSTRIP=true'
+
+do_compile:prepend() {
+	if [ "${SCMVERSION}" = "y" ]; then
+		# Add GIT revision to the local version
+		head=`cd ${S} ; git tag --points-at HEAD 2> /dev/null`
+		sep="-"
+		if [ -z "${head}" ]; then
+			head=`cd ${S} ; git rev-parse --verify --short HEAD 2> /dev/null`
+			sep="+g"
+		fi
+			printf "%s%s%s" "${UBOOT_LOCALVERSION}" $sep $head > ${S}/.scmversion
+			printf "%s%s%s" "${UBOOT_LOCALVERSION}" $sep $head > ${B}/.scmversion
+	else
+		printf "%s" "${UBOOT_LOCALVERSION}" > ${S}/.scmversion
+		printf "%s" "${UBOOT_LOCALVERSION}" > ${B}/.scmversion
+	fi
+}
 
 do_deploy:append:mx8m-nxp-bsp() {
 	install -m 644 ${B}/${UBOOT_WIC_BINARY} ${DEPLOY_DIR_IMAGE}/
