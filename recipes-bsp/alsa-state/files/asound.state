@@ -46,7 +46,7 @@ state.imxsgtl5000 {
         control.5 {
                 iface MIXER
                 name 'Capture Switch'
-                value false
+                value true
                 comment {
                         access 'read write'
                         type BOOLEAN
