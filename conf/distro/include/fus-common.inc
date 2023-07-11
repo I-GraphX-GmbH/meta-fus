@@ -28,3 +28,5 @@ RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
 # "-F+S". This appends the string "-F+S". Due to the string is upper case we
 # need to set variable to convert it to lower case.
 KERNEL_MODULE_PACKAGE_SUFFIX = "${@legitimize_package_name(d.getVar('KERNEL_VERSION'))}"
+
+INHERIT:append ?= " image-buildinfo"
