@@ -28,6 +28,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     e2fsprogs-mke2fs \
     fbset \
     i2c-tools \
+    spitools \
     iproute2 \
     memtester \
     ethtool \
@@ -35,6 +36,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     mtd-utils-ubifs \
     lmbench \
     libgpiod \
+    libgpiod-tools \
     fbida \
     firmwared \
     strace \
