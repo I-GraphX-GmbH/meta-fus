@@ -55,8 +55,4 @@ do_compile:prepend() {
 	fi
 }
 
-do_deploy:append:mx8m-nxp-bsp() {
-	install -m 644 ${B}/${UBOOT_WIC_BINARY} ${DEPLOY_DIR_IMAGE}/
-}
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
