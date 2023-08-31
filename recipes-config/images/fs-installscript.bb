@@ -12,18 +12,22 @@ ARCH_armv7a = "arm"
 ARCH_aarch64 = "arm64"
 
 SRC_URI = " \
-           file://install.txt "
+           file://install.txt \
+           file://update-uboot-nboot-sysimg.txt\
+		  "
 
 DEPENDS:append = " u-boot-mkimage-native"
 
 do_compile() {
     uboot-mkimage -A ${ARCH} -O u-boot -T script -C none -n "F&S install script" -d ${WORKDIR}/install.txt ${WORKDIR}/install.scr
+	uboot-mkimage -A ${ARCH} -O u-boot -T script -C none -n "F&S install script" -d ${WORKDIR}/update-uboot-nboot-sysimg.txt ${WORKDIR}/update-uboot-nboot-sysimg.scr
 }
 
 do_deploy() {
 	install -d ${DEPLOYDIR}/
 	install -m 0777 ${WORKDIR}/install.scr ${DEPLOYDIR}
+	install -m 0777 ${WORKDIR}/update-uboot-nboot-sysimg.scr ${DEPLOYDIR}
 }
 addtask deploy before do_build after do_compile
 
-FILES:${PN} = "install.scr"
+FILES:${PN} = "install.scr update-uboot-nboot-sysimg.scr"
