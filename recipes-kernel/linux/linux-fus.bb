@@ -13,6 +13,8 @@ DEPENDS += "lzop-native bc-native"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 
 # SRC_URI and SRCREV are set in the bbappend file
+SRC_URI = "git://github.com/FSEmbedded/linux-fus;protocol=https;branch=master"
+SRCREV = "b38f717d5d8ce622d9bc806163e871628e80e388"
 
 S = "${WORKDIR}/git"
 PV = "+git${SRCPV}"
