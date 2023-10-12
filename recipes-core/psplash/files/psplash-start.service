@@ -1,0 +1,12 @@
+[Unit]
+Description=Start Psplash Boot Screen
+Before=local-fs-pre.target
+DefaultDependencies=no
+
+[Service]
+ExecStartPre=/bin/sh -c "if [ -e /sys/class/graphics/fbcon/cursor_blink ]; then echo 0 > /sys/class/graphics/fbcon/cursor_blink; fi"
+ExecStart=/bin/sh -c "/usr/bin/psplash"
+ExecStartPost=/bin/sh -c "if [ -e /sys/class/graphics/fbcon/cursor_blink ]; then echo 1 > /sys/class/graphics/fbcon/cursor_blink; fi"
+
+[Install]
+WantedBy=sysinit.target
