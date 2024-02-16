@@ -43,5 +43,5 @@ build:
   after_script:
     - export BUILD_OUTPUT_DIR=$(cat output_dir)
     - mkdir artifacts
-    - if [[ "$CI_JOB_STATUS" == "success" ]]; then mv $BUILD_OUTPUT_DIR/* ./artifacts; else mv $KAS_WORK_DIR/build/tmp*/work*/**/temp/log.do_*.* ./artifacts; fi
+    - if [[ "$CI_JOB_STATUS" == "success" ]]; then mv $BUILD_OUTPUT_DIR/* ./artifacts; else find $KAS_WORK_DIR/ -type f -path '$KAS_WORK_DIR/build/tmp*/work*/**/temp/log.do_*.*' -exec mv -t ./artifacts {} + ; fi
     - rm output_dir
