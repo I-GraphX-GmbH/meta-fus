@@ -11,8 +11,8 @@ RDEPENDS:${PN}:append = " fs-installscript"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
-SRC_URI = "git://github.com/FSEmbedded/u-boot-fus;protocol=https;branch=master"
-SRCREV = "5c669f2882d11e21ac7bf5a1723c647ce36bb188"
+SRC_URI = "git://github.com/I-GraphX-GmbH/u-boot-fus;protocol=https;branch=master"
+SRCREV = "efa64f179ec0fbf4564fc4dfffb3588bf2cbe6c3"
 
 S = "${WORKDIR}/git"
 PV = "+git${SRCPV}"
