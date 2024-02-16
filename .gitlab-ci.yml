@@ -38,10 +38,10 @@ build:
     - mkdir -p $KAS_WORK_DIR
     - sed -i "s|!!!REPLACE_ME!!!|$CI_PROJECT_DIR|g" "$CI_PROJECT_DIR/.runner/uboot.yml"
     - cd $BBBUILD_DIR
-    - kas -l warning build "$CI_PROJECT_DIR/.runner/uboot.yml"
+    - kas build "$CI_PROJECT_DIR/.runner/uboot.yml"
     - echo "Building done"
   after_script:
     - export BUILD_OUTPUT_DIR=$(cat output_dir)
     - mkdir artifacts
-    - if [[ "$CI_JOB_STATUS" == "success" ]]; then mv $BUILD_OUTPUT_DIR/* ./artifacts; else find $KAS_WORK_DIR/ -type f -path '$KAS_WORK_DIR/build/tmp*/work*/**/temp/log.do_*.*' -exec mv -t ./artifacts {} + ; fi
+    - if [[ "$CI_JOB_STATUS" == "success" ]]; then mv $BUILD_OUTPUT_DIR/* ./artifacts; else find $KAS_WORK_DIR/ -type f -path "$KAS_WORK_DIR/build/tmp*/work*/**/temp/log.do_*.*" -exec mv -t ./artifacts {} + ; fi
     - rm output_dir
