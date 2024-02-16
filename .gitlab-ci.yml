@@ -38,6 +38,7 @@ build:
     - mkdir -p $KAS_WORK_DIR
     - sed -i "s|!!!REPLACE_ME!!!|$CI_PROJECT_DIR|g" "$CI_PROJECT_DIR/.runner/uboot.yml"
     - cd $BBBUILD_DIR
+    - sudo DEBIAN_FRONTEND=noninteractive apt update && sudo DEBIAN_FRONTEND=noninteractive apt install -y xxd libarchive-zip-perl
     - kas build "$CI_PROJECT_DIR/.runner/uboot.yml"
     - echo "Building done"
   after_script:
