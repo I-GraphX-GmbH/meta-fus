@@ -27,3 +27,8 @@ PREFERRED_PROVIDER_virtual/bootloader:mx7ulp-nxp-bsp ??= "u-boot-fus"
 PREFERRED_PROVIDER_virtual/bootloader:mx8mm-nxp-bsp  ??= "u-boot-fus"
 PREFERRED_PROVIDER_virtual/bootloader:mx8mn-nxp-bsp  ??= "u-boot-fus"
 PREFERRED_PROVIDER_virtual/bootloader:mx8mp-nxp-bsp  ??= "u-boot-fus"
+
+# Remove Kernel image from the rootfs, because it is located in an own
+# partition.
+RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
+

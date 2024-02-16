@@ -53,6 +53,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     openssh \
     wpa-supplicant \
     hostapd \
+	psplash \
     liberation-fonts \
     linux-firmware-wl12xx \
     linux-firmware-wl18xx \

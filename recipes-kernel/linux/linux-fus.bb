@@ -34,7 +34,9 @@ KBUILD_DEFCONFIG:mx8mp-nxp-bsp = "fsimx8mp_defconfig"
 
 # Prevent the galcore-module from beeing build, because it is already
 # included in the F&S-Linux-Kernel as a build-in
-RPROVIDES:kernel-image += "kernel-module-imx-gpu-viv"
+RPROVIDES:${KERNEL_PACKAGE_NAME}-base += "kernel-module-imx-gpu-viv"
+RREPLACES:${KERNEL_PACKAGE_NAME}-base += "kernel-module-imx-gpu-viv"
+RCONFLICTS:${KERNEL_PACKAGE_NAME}-base += "kernel-module-imx-gpu-viv"
 
 do_extraunpack () {
 	mv ${WORKDIR}/linux-fus/* ${S}/
