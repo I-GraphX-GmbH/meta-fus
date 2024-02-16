@@ -1,0 +1,56 @@
+image: ghcr.io/siemens/kas/kas:4.1
+
+variables:
+  CACHE_DIR: /persistent/u-boot-fus
+  BBBUILD_DIR: "$CI_PROJECT_DIR/build"
+  IMAGE_DIR: "$BBBUILD_DIR/work/build/tmp/deploy/images"
+
+stages:
+  - build
+  - upload
+build:
+  variables:
+    BB_NUMBER_THREADS: "4"
+    PARALLEL_MAKE: "-j 8"
+    DL_DIR: "$CACHE_DIR/work/downloads"
+    SSTATE_DIR: "$CACHE_DIR/work/sstate-cache"
+    TOOLCHAIN_DIR: "$CACHE_DIR/toolchains"
+    KAS_WORK_DIR: "$BBBUILD_DIR/work"
+    KAS_REPO_REF_DIR: "$CACHE_DIR/repos"
+  stage: build
+  artifacts:
+    untracked: true
+    when: always
+    paths:
+      - artifacts
+  interruptible: true
+  tags:
+    - yocto:kirkstone
+  script:
+    - |
+      export BUILD_OUTPUT_DIR=$IMAGE_DIR/$(cat "$CI_PROJECT_DIR/.runner/uboot.yml" | grep "machine: " | awk -F ': ' '{print $2}')
+    - echo BUILD_OUTPUT_DIR = $BUILD_OUTPUT_DIR
+    - echo KAS_WORK_DIR = $KAS_WORK_DIR
+    - echo SSTATE_DIR = $SSTATE_DIR
+    - echo DL_DIR = $DL_DIR
+    - echo BBBUILD_DIR = $BBBUILD_DIR
+    - echo "-----------------------------"
+    - echo $BUILD_OUTPUT_DIR > output_dir
+    - mkdir -p $KAS_WORK_DIR
+    - mkdir -p "$BBBUILD_DIR/.ssh/"
+    - echo "Host *" >> "$BBBUILD_DIR/.ssh/config"
+    - echo "  StrictHostKeyChecking no" >> "$BBBUILD_DIR/.ssh/config"
+    - echo "  UserKnownHostsFile=/dev/null" >> "$BBBUILD_DIR/.ssh/config"
+    - echo "$IGX_YOCTO_SSH_KEY" | base64 -d > "$BBBUILD_DIR/.ssh/id"
+    - export SSH_PRIVATE_KEY_FILE="$BBBUILD_DIR/.ssh/id"
+    - chmod 400 "$BBBUILD_DIR/.ssh/id"
+    - chmod 700 "$BBBUILD_DIR/.ssh"
+    - sed -i "s|!!!REPLACE_ME!!!|$CI_PROJECT_DIR|g" "$CI_PROJECT_DIR/.runner/uboot.yml"
+    - cd $BBBUILD_DIR
+    - kas -l warning build "$CI_PROJECT_DIR/.runner/uboot.yml"
+    - echo "Building done"
+  after_script:
+    - export BUILD_OUTPUT_DIR=$(cat output_dir)
+    - mkdir artifacts
+    - if [[ "$CI_JOB_STATUS" == "success" ]]; then mv $BUILD_OUTPUT_DIR/* ./artifacts; else mv "$KAS_WORK_DIR/build/tmp*/work*/**/temp/log.do_*.*" ./artifacts; fi
+    - rm output_dir

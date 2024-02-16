@@ -1,0 +1,69 @@
+header:
+   version: 11
+distro: fus-imx-wayland
+build_system: oe
+machine: fsimx8mp
+target: virtual/bootloader
+
+repos:
+   poky:
+      url: "https://git.yoctoproject.org/git/poky"
+      commit: "6539812e238edfefc0941abeabbbebe345c0cd3b"
+      path: "sources/poky"
+      layers:
+         meta:
+         meta-poky:
+   meta-openembedded:
+      url: "https://github.com/openembedded/meta-openembedded"
+      commit: "744a4b6eda88b9a9ca1cf0df6e18be384d9054e3"
+      path: "sources/meta-openembedded"
+      layers:
+         meta-oe:
+         meta-multimedia:
+         meta-python:
+         meta-webserver:
+         meta-networking:
+         meta-gnome:
+         meta-filesystems:
+   meta-imx:
+      url: "https://github.com/nxp-imx/meta-imx"
+      tag: "rel_imx_5.15.71_2.2.1"
+      path: "sources/meta-imx"
+      layers:
+         meta-bsp:
+         meta-sdk:
+         meta-ml:
+         meta-v2x:
+   meta-freescale:
+      url: "https://github.com/Freescale/meta-freescale"
+      path: "sources/meta-freescale"
+      commit: "c82d4634e7aba8bc0de73ce1dfc997b630051571"
+   meta-freescale-3rdparty:
+      url: "https://github.com/Freescale/meta-freescale-3rdparty"
+      path: "sources/meta-freescale-3rdparty"
+      commit: "5977197340c7a7db17fe3e02a4e014ad997565ae"
+   meta-freescale-distro:
+      url: "https://github.com/Freescale/meta-freescale-distro"
+      path: "sources/meta-freescale-distro"
+      commit: "d5bbb487b2816dfc74984a78b67f7361ce404253"
+   meta-clang:
+      url: "https://github.com/kraj/meta-clang"
+      path: "sources/meta-clang"
+      commit: "c728c3f9168c8a4ed05163a51dd48ca1ad8ac21d"
+   meta-fus:
+      path: "!!!REPLACE_ME!!!"
+local_conf_header:
+    custom-local-conf: |
+      ACCEPT_FSL_EULA = "1"
+      DISTRO_FEATURES:remove = " directfb x11"
+      PACKAGE_CLASSES ?= "package_rpm"
+      EXTRA_IMAGE_FEATURES ?= "debug-tweaks package-management"
+      USER_CLASSES ?= ""
+      PATCHRESOLVE = "noop"
+      PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
+      CONF_VERSION = "2"
+      INIT_MANAGER = "systemd"
+      DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+      IMAGE_FEATURES += "read-only-rootfs"
+      VIRTUAL-RUNTIME_initscripts = ""
+      INHERIT += "rm_work"
