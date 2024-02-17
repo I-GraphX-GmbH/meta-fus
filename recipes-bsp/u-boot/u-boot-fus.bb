@@ -12,7 +12,7 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
 SRC_URI = "git://github.com/I-GraphX-GmbH/u-boot-fus;protocol=https;branch=master"
-SRCREV = "1e2701c1b0493d4ea36460902c04f59827d6d49a"
+SRCREV = "32981de49ca4e32a895d5c883ef7cf3320db04e5"
 
 S = "${WORKDIR}/git"
 PV = "+git${SRCPV}"
